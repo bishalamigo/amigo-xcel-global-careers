@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/amigo-xcel-global-careers/', // ✅ Added comma
+  base: '/amigo-xcel-global-careers/',
   server: {
     host: "::",
     port: 8080,
