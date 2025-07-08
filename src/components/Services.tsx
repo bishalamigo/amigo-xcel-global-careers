@@ -24,7 +24,7 @@ const Services = () => {
       title: "Resume & Profile Optimization",
       description: "Professional resume writing and LinkedIn optimization to help candidates stand out in the job market.",
       features: ["ATS-optimized resumes", "LinkedIn profile enhancement", "Cover letter writing", "Interview coaching"],
-      pricing: "Starting from $79 • Premium packages available"
+      pricing: "Starting from $5 • Depends on service requirements"
     }
   ];
 
