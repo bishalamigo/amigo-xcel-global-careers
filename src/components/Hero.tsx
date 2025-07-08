@@ -6,7 +6,11 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%234f46e5\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+      <div className="absolute inset-0 opacity-20">
+        <div className="w-full h-full bg-repeat" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f46e5' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+      </div>
       
       <div className="relative container mx-auto px-6 pt-20 pb-16">
         <div className="max-w-4xl mx-auto text-center">
@@ -60,7 +64,9 @@ const Hero = () => {
       {/* World Map Visualization */}
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-slate-900/50 to-transparent">
         <div className="relative h-full overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 600\"%3E%3Cpath d=\"M200,200 Q300,150 400,200 T600,200 T800,200 T1000,200\" stroke=\"%234f46e5\" stroke-width=\"2\" fill=\"none\" opacity=\"0.3\"/%3E%3C/svg%3E')] bg-center bg-no-repeat opacity-20"></div>
+          <div className="absolute inset-0 bg-center bg-no-repeat opacity-20" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cpath d='M200,200 Q300,150 400,200 T600,200 T800,200 T1000,200' stroke='%234f46e5' stroke-width='2' fill='none' opacity='0.3'/%3E%3C/svg%3E")`
+          }}></div>
           {/* Success Pins */}
           <div className="absolute bottom-16 left-1/4 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
           <div className="absolute bottom-20 right-1/3 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
