@@ -1,30 +1,30 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, Linkedin, Users, CheckCircle } from "lucide-react";
+import { Code, Users, FileText, Linkedin, UserCheck, CheckCircle } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      icon: FileText,
-      title: "ATS-Optimized Resumes",
-      description: "Resumes that pass bots and impress humans. Crafted by hiring experts who know what recruiters want.",
-      features: ["ATS-compliant formatting", "Industry-specific keywords", "Recruiter-approved templates"],
-      pricing: "Free audit • Expert rewrite from $79"
-    },
-    {
-      icon: Linkedin,
-      title: "LinkedIn Optimization",
-      description: "Profiles that show up in recruiter searches. Get discovered by the right opportunities.",
-      features: ["SEO-optimized headlines", "Compelling summaries", "Strategic keyword placement"],
-      pricing: "Free tips • Full optimization from $49"
+      icon: Code,
+      title: "IT Hiring Solutions",
+      description: "Find the perfect tech talent for your team. From developers to data scientists, we connect you with skilled IT professionals.",
+      features: ["Software Developers", "DevOps Engineers", "Data Scientists", "QA Engineers", "UI/UX Designers"],
+      pricing: "Custom packages • Contact for quote"
     },
     {
       icon: Users,
-      title: "Career Coaching",
-      description: "1:1 sessions with real IT hiring experts. Get insider knowledge and confidence.",
-      features: ["Interview preparation", "Salary negotiation", "Career transition guidance"],
-      pricing: "30-min free consultation • Sessions from $99"
+      title: "Non-IT Hiring Solutions",
+      description: "Complete recruitment services for all non-technical roles. Marketing, sales, finance, HR, and more.",
+      features: ["Marketing Professionals", "Sales Representatives", "Finance Experts", "HR Specialists", "Administrative Staff"],
+      pricing: "Flexible plans • Volume discounts available"
+    },
+    {
+      icon: FileText,
+      title: "Resume & Profile Optimization",
+      description: "Professional resume writing and LinkedIn optimization to help candidates stand out in the job market.",
+      features: ["ATS-optimized resumes", "LinkedIn profile enhancement", "Cover letter writing", "Interview coaching"],
+      pricing: "Starting from $79 • Premium packages available"
     }
   ];
 
@@ -33,11 +33,11 @@ const Services = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            What We Do
+            Our Core Services
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We don't just polish resumes. We position careers.<br />
-            <span className="text-blue-600">Free options available. Premium when you're ready to level up.</span>
+            Comprehensive hiring solutions for businesses and professional services for job seekers.<br />
+            <span className="text-blue-600">Tailored solutions for every hiring need and career goal.</span>
           </p>
         </div>
 
@@ -76,7 +76,7 @@ const Services = () => {
 
         <div className="text-center mt-12">
           <p className="text-lg text-gray-600 italic">
-            "We don't just polish resumes. We position careers."
+            "Your success is our mission - whether you're hiring or job hunting."
           </p>
         </div>
       </div>

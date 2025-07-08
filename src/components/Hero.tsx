@@ -17,45 +17,45 @@ const Hero = () => {
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8 animate-fade-in">
             <Globe className="w-4 h-4" />
-            <span className="text-sm">Trusted by tech professionals in 10+ countries</span>
+            <span className="text-sm">Trusted by companies and professionals in 10+ countries</span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-in">
-            Resumes that <span className="text-blue-400">Open Doors.</span><br />
-            Profiles that <span className="text-green-400">Get Clicks.</span>
+            IT & Non-IT <span className="text-blue-400">Hiring Solutions.</span><br />
+            <span className="text-green-400">Find. Hire. Succeed.</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto animate-fade-in">
-            Built by tech hiring experts. Trusted by job seekers worldwide.<br />
-            <span className="text-blue-300">Real people. Real jobs. Real results.</span>
+            Your trusted partner for IT and Non-IT recruitment solutions.<br />
+            <span className="text-blue-300">Plus professional resume and profile optimization services.</span>
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in">
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg">
-              Get My Resume Reviewed
+              Start Hiring Today
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg">
-              See Before/After Examples
+              View Our Services
             </Button>
           </div>
 
           {/* Social Proof */}
           <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center animate-fade-in">
             <div>
-              <div className="text-3xl font-bold text-blue-400">2,500+</div>
-              <div className="text-gray-400">Resumes Crafted</div>
+              <div className="text-3xl font-bold text-blue-400">500+</div>
+              <div className="text-gray-400">Successful Placements</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-green-400">85%</div>
-              <div className="text-gray-400">Interview Rate</div>
+              <div className="text-3xl font-bold text-green-400">95%</div>
+              <div className="text-gray-400">Client Satisfaction</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-yellow-400">4.9★</div>
-              <div className="text-gray-400">Client Rating</div>
+              <div className="text-3xl font-bold text-yellow-400">50+</div>
+              <div className="text-gray-400">Partner Companies</div>
             </div>
           </div>
         </div>
