@@ -5,16 +5,14 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/amigo-xcel-global-careers/'
-    plugins: [react()],
+  base: '/amigo-xcel-global-careers/', // ✅ Added comma
   server: {
     host: "::",
     port: 8080,
   },
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === 'development' && componentTagger(), // ✅ Combined plugins correctly
   ].filter(Boolean),
   resolve: {
     alias: {
