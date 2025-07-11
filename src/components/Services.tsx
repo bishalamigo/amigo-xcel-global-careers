@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code, Users, FileText, Linkedin, UserCheck, CheckCircle } from "lucide-react";
+import { Code, Users, FileText, Linkedin, UserCheck, CheckCircle, ArrowRight } from "lucide-react";
 
 const Services = () => {
   const services = [
@@ -29,55 +29,66 @@ const Services = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-24 bg-gradient-to-b from-background to-accent/10">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Our Core Services
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive hiring solutions for businesses and professional services for job seekers.<br />
-            <span className="text-blue-600">Tailored solutions for every hiring need and career goal.</span>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Comprehensive hiring solutions for businesses and professional services for job seekers.
+            <span className="block mt-2 text-primary font-medium">Tailored solutions for every hiring need and career goal.</span>
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="relative group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
-                  <service.icon className="w-8 h-8 text-blue-600" />
+            <Card key={index} className="group relative overflow-hidden hover-lift glass-effect border-border/50 hover:border-primary/20 transition-all duration-300 h-full">
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <CardHeader className="text-center pb-6 relative z-10">
+                <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 transform">
+                  <service.icon className="w-10 h-10 text-primary" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">{service.title}</CardTitle>
+                <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors duration-300">{service.title}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <p className="text-gray-600 text-center">{service.description}</p>
+              <CardContent className="space-y-6 relative z-10">
+                <p className="text-muted-foreground text-center leading-relaxed">{service.description}</p>
                 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
+                    <div key={idx} className="flex items-center gap-3 group/feature">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 group-hover/feature:scale-110 transition-transform" />
+                      <span className="text-foreground/80 group-hover/feature:text-foreground transition-colors">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4 text-center">
-                  <p className="text-sm font-semibold text-gray-900">{service.pricing}</p>
+                <div className="glass-effect rounded-lg p-4 text-center border border-primary/10">
+                  <p className="text-sm font-semibold text-primary">{service.pricing}</p>
                 </div>
 
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                <Button variant="premium" className="w-full group/btn">
                   Get Started
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-lg text-gray-600 italic">
-            "Your success is our mission - whether you're hiring or job hunting."
-          </p>
+        <div className="text-center mt-16">
+          <div className="glass-effect rounded-lg p-8 max-w-2xl mx-auto border border-primary/10">
+            <p className="text-xl text-foreground font-medium italic leading-relaxed">
+              "Your success is our mission - whether you're hiring or job hunting."
+            </p>
+            <div className="flex justify-center mt-4">
+              <div className="flex -space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-2 h-2 bg-primary rounded-full"></div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

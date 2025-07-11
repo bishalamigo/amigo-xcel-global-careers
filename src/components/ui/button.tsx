@@ -5,24 +5,40 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 relative overflow-hidden",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        // Tesla-inspired primary button
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]",
+        
+        // Netflix-inspired bold CTA
+        premium: "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]",
+        
+        // Google Material-inspired elevated
+        elevated: "bg-primary text-primary-foreground shadow-md hover:shadow-lg hover:bg-primary/90 transition-all duration-200 hover:scale-[1.01]",
+        
+        // Microsoft Fluent-inspired outline
+        outline: "border border-primary/20 bg-background/50 backdrop-blur-sm hover:bg-primary/5 hover:border-primary/40 transition-all duration-200 hover:shadow-md",
+        
+        // Meta-inspired glass effect
+        glass: "bg-background/80 backdrop-blur-md border border-border/50 hover:bg-background/90 hover:border-border/80 transition-all duration-200",
+        
+        // Amazon-inspired secondary
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all duration-200 hover:shadow-sm",
+        
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-all duration-200 hover:shadow-lg",
+        
+        ghost: "hover:bg-accent hover:text-accent-foreground transition-all duration-200",
+        
+        // Enhanced link with micro-interaction
+        link: "text-primary underline-offset-4 hover:underline transition-all duration-200 hover:text-primary/80",
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        sm: "h-9 rounded-md px-3 text-xs",
+        lg: "h-12 rounded-lg px-8 text-base font-semibold",
+        xl: "h-14 rounded-lg px-10 text-lg font-semibold",
         icon: "h-10 w-10",
       },
     },
