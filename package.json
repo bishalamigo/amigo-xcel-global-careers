@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-   "homepage": "https://bishalamigo.github.io/amigo-xcel-global-careers/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
