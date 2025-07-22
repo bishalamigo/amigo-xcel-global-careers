@@ -54,7 +54,7 @@ const Services = () => {
               <CardContent className="space-y-6 relative z-10">
                 <p className="text-muted-foreground text-center leading-relaxed">{service.description}</p>
                 
-                <div className="space-y-3">
+                <div className="space-y-3" id = 'my-target-section'>
                   {service.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-3 group/feature">
                       <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 group-hover/feature:scale-110 transition-transform" />

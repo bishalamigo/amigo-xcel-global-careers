@@ -2,6 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Globe, Users, TrendingUp, MapPin, CheckCircle, Star } from "lucide-react";
 
+
+const mySection = () =>{
+   const targetSection = document.getElementById('my-target-section');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+}
+
 const Hero = () => {
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5 overflow-hidden">
@@ -49,7 +57,7 @@ const Hero = () => {
               Start Hiring Today
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button> */}
-            <Button variant="glass" size="xl" className="group">
+            <Button variant="glass" size="xl" className="group" onClick={mySection}>
               View Our Services
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
