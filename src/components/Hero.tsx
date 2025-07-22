@@ -45,10 +45,10 @@ const Hero = () => {
 
           {/* Enhanced CTA Buttons - Multi-company inspired */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <Button variant="premium" size="xl" className="group">
+            {/* <Button variant="premium" size="xl" className="group">
               Start Hiring Today
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            </Button> */}
             <Button variant="glass" size="xl" className="group">
               View Our Services
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
