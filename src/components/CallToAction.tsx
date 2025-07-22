@@ -109,12 +109,21 @@ const CallToAction = () => {
         <div className="mt-16 text-center">
           <p className="text-gray-400 text-sm mb-4">Trusted by professionals at</p>
           <div className="flex flex-wrap justify-center gap-8 opacity-60">
-            <span className="text-lg font-semibold">Google</span>
-            <span className="text-lg font-semibold">Microsoft</span>
-            <span className="text-lg font-semibold">Amazon</span>
-            <span className="text-lg font-semibold">Meta</span>
-            <span className="text-lg font-semibold">Tesla</span>
-            <span className="text-lg font-semibold">Netflix</span>
+            <span className="text-lg font-semibold">Dell</span>
+            <span className="text-lg font-semibold">Wipro</span>
+            <span className="text-lg font-semibold">Salesforce</span>
+            <span className="text-lg font-semibold">HCL</span>
+            <span className="text-lg font-semibold">Accenture</span>
+            <span className="text-lg font-semibold">Fujitsu</span>
+            <span className="text-lg font-semibold">Tech Mahindra</span>
+            <span className="text-lg font-semibold">Qiagen</span>
+            <span className="text-lg font-semibold">Essilor</span>
+            <span className="text-lg font-semibold">Caspo</span>
+            <span className="text-lg font-semibold">Kuehne + Nagel</span>
+            <span className="text-lg font-semibold">Ncell</span>
+            <span className="text-lg font-semibold">Daraz</span>
+            <span className="text-lg font-semibold">Golyan Group</span>
+            <span className="text-lg font-semibold">BizBazar</span>
           </div>
         </div>
       </div>
