@@ -3,6 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Code, Users, FileText, Linkedin, UserCheck, CheckCircle, ArrowRight } from "lucide-react";
 
+
+
+
 const Services = () => {
   const services = [
     {
@@ -67,10 +70,10 @@ const Services = () => {
                   <p className="text-sm font-semibold text-primary">{service.pricing}</p>
                 </div>
 
-                <Button variant="premium" className="w-full group/btn">
+                {/* <Button variant="premium" className="w-full group/btn">
                   Get Started
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
+                </Button> */}
               </CardContent>
             </Card>
           ))}

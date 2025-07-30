@@ -1,3 +1,4 @@
+ import React, { useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Globe, Users, TrendingUp, MapPin, CheckCircle, Star } from "lucide-react";
