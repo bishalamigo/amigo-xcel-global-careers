@@ -5,7 +5,7 @@ import { Star, Quote } from "lucide-react";
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Ramesh Patel",
+      name: "Ramesh Gotani",
       role: "Full Stack Developer",
       location: "Melbourne, Australia 🇦🇺",
       image: "/placeholder.svg",
@@ -23,7 +23,7 @@ const Testimonials = () => {
       timeline: "Landed internship → Full-time"
     },
     {
-      name: "Michael Chen",
+      name: "Mahesh Nepali",
       role: "DevOps Engineer",
       location: "Singapore 🇸🇬",
       image: "/placeholder.svg",
@@ -32,7 +32,7 @@ const Testimonials = () => {
       timeline: "Career pivot in 6 weeks"
     },
     {
-      name: "Sarah Martinez",
+      name: "Sarah Joel",
       role: "Frontend Developer",
       location: "London, UK 🇬🇧",
       image: "/placeholder.svg",
@@ -50,7 +50,7 @@ const Testimonials = () => {
       timeline: "Visa → Dream job"
     },
     {
-      name: "Jessica Park",
+      name: "Jessica Mandal",
       role: "Product Manager",
       location: "San Francisco, US 🇺🇸",
       image: "/placeholder.svg",
