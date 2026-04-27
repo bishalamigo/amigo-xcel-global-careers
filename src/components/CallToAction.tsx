@@ -13,9 +13,8 @@ const CallToAction = () => {
     name: "",
     email: "",
     phone: "",
-    currentRole: "",
-    experience: "",
-    targetRole: ""
+    service: "",
+    message: ""
   });
 
   const [expertForm, setExpertForm] = useState({
