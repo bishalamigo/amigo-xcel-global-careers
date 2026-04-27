@@ -1,142 +1,48 @@
-
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Quote } from "lucide-react";
+import { Globe2, Briefcase, Users2 } from "lucide-react";
+
+const proof = [
+  { icon: Users2, stat: "Growing", label: "Roster of clients scaling their teams" },
+  { icon: Briefcase, stat: "Multi-Project", label: "Delivered across tech, content & hiring" },
+  { icon: Globe2, stat: "Global", label: "Working with clients across countries" },
+];
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Ramesh Gotani",
-      role: "Full Stack Developer",
-      location: "Melbourne, Australia 🇦🇺",
-      image: "/placeholder.svg",
-      story: "Before AmigoXcel, I got 0 replies in 2 months. After their rewrite, I landed 3 interviews in a week.",
-      rating: 5,
-      timeline: "Got hired in 3 weeks"
-    },
-    {
-      name: "Priya Sharma",
-      role: "Data Scientist",
-      location: "Toronto, Canada 🇨🇦",
-      image: "/placeholder.svg",
-      story: "As an international student, I didn't know how to present my skills. AmigoXcel helped me showcase my projects perfectly.",
-      rating: 5,
-      timeline: "Landed internship → Full-time"
-    },
-    {
-      name: "Mahesh Nepali",
-      role: "DevOps Engineer",
-      location: "Singapore 🇸🇬",
-      image: "/placeholder.svg",
-      story: "Switching careers felt impossible. Their LinkedIn optimization got me noticed by recruiters in my new field.",
-      rating: 5,
-      timeline: "Career pivot in 6 weeks"
-    },
-    {
-      name: "Sarah Joel",
-      role: "Frontend Developer",
-      location: "London, UK 🇬🇧",
-      image: "/placeholder.svg",
-      story: "The coaching sessions gave me confidence to negotiate. I got 30% more than my initial offer!",
-      rating: 5,
-      timeline: "Salary increase: 30%"
-    },
-    {
-      name: "Arun Thapa",
-      role: "Software Engineer",
-      location: "Sydney, Australia 🇦🇺",
-      image: "/placeholder.svg",
-      story: "From Nepal to Sydney: AmigoXcel made my resume stand out among hundreds of applications.",
-      rating: 5,
-      timeline: "Visa → Dream job"
-    },
-    {
-      name: "Jessica Mandal",
-      role: "Product Manager",
-      location: "San Francisco, US 🇺🇸",
-      image: "/placeholder.svg",
-      story: "Their LinkedIn strategy was game-changing. Recruiters started reaching out to me instead.",
-      rating: 5,
-      timeline: "5 offers in 1 month"
-    }
-  ];
-
   return (
-    <section className="py-20 bg-white">
+    <section className="py-28 bg-muted/30">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Real People. Real Jobs. Real Results.
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">Social Proof</p>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+            Built on Trust.
+            <span className="block gradient-text">Growing Every Day.</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don't just take our word for it. Here's how AmigoXcel has transformed careers across the globe.
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="relative group hover:shadow-xl transition-all duration-300 border-0 shadow-lg overflow-hidden">
-              {/* Quote Icon */}
-              <div className="absolute top-4 right-4 opacity-10">
-                <Quote className="w-8 h-8 text-blue-600" />
-              </div>
-              
-              <CardContent className="p-6 space-y-4">
-                {/* Rating */}
-                <div className="flex space-x-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
+          {proof.map((p, i) => (
+            <Card key={i} className="bg-card/80 backdrop-blur-sm border-border/60 hover-lift">
+              <CardContent className="p-8 text-center">
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                  <p.icon className="w-7 h-7 text-primary" />
                 </div>
-
-                {/* Story */}
-                <blockquote className="text-gray-700 italic leading-relaxed">
-                  "{testimonial.story}"
-                </blockquote>
-
-                {/* Profile */}
-                <div className="flex items-center space-x-3 pt-4 border-t border-gray-100">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover bg-gray-200"
-                  />
-                  <div>
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-sm text-blue-600">{testimonial.role}</div>
-                    <div className="text-sm text-gray-500">{testimonial.location}</div>
-                  </div>
-                </div>
-
-                {/* Timeline Badge */}
-                <div className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium text-center">
-                  {testimonial.timeline}
-                </div>
+                <div className="text-3xl font-bold gradient-text mb-2">{p.stat}</div>
+                <p className="text-muted-foreground">{p.label}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* Summary Stats */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 text-white text-center">
-          <h3 className="text-3xl font-bold mb-4">Join 2,500+ Success Stories</h3>
-          <div className="grid md:grid-cols-4 gap-6">
-            <div>
-              <div className="text-2xl font-bold">10+</div>
-              <div className="text-blue-100">Countries</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">85%</div>
-              <div className="text-blue-100">Interview Rate</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">4.9★</div>
-              <div className="text-blue-100">Average Rating</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">30%</div>
-              <div className="text-blue-100">Salary Increase</div>
-            </div>
-          </div>
+        <div className="max-w-3xl mx-auto">
+          <Card className="bg-card border-border/60 overflow-hidden">
+            <CardContent className="p-8 md:p-12">
+              <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">Case Snapshot</p>
+              <blockquote className="text-xl md:text-2xl font-light leading-relaxed text-foreground">
+                "We came in for hiring. Stayed for the engine. Within months, our team, content, and tech were finally moving in the same direction."
+              </blockquote>
+              <p className="mt-6 text-sm text-muted-foreground">— Founder, growing digital brand</p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
