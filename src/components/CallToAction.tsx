@@ -126,17 +126,18 @@ const CallToAction = () => {
 
   return (
     <>
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white">
-        <div className="container mx-auto px-6">
+      <section id="contact" className="py-28 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl"></div>
+        <div className="container mx-auto px-6 relative">
           {/* Main CTA */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              Ready for a resume that<br />
-              <span className="text-blue-400">works as hard as you do?</span>
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-blue-400 mb-6">The Final Close</p>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight">
+              Let's Build
+              <span className="block bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text text-transparent">What's Next.</span>
             </h2>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Start with a free review. Upgrade with expert-crafted clarity.<br />
-              <span className="text-green-400">Your global career starts here.</span>
+            <p className="text-lg md:text-xl text-gray-300 mb-8 font-light leading-relaxed">
+              Whether you're starting out or scaling up, we bring the pieces together so your business moves forward — faster.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -157,8 +158,8 @@ const CallToAction = () => {
                 <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold">Start Free</h3>
-                <p className="text-gray-300">Get your resume reviewed and receive actionable feedback</p>
+                <h3 className="text-2xl font-bold">Book a Free Strategy Call</h3>
+                <p className="text-gray-300">Tell us where you are. We'll show you what's possible.</p>
                 <ul className="space-y-2 text-sm text-left">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
@@ -187,8 +188,8 @@ const CallToAction = () => {
                 <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto">
                   <Zap className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold">Expert Upgrade</h3>
-                <p className="text-gray-300">Let our hiring experts craft your perfect career materials</p>
+                <h3 className="text-2xl font-bold">Start Your Project</h3>
+                <p className="text-gray-300">Talent, tech, training, or media — let's build your engine.</p>
                 <ul className="space-y-2 text-sm text-left">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-blue-400 flex-shrink-0" />
