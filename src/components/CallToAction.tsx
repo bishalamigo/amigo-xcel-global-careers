@@ -32,33 +32,36 @@ const CallToAction = () => {
   const handleFreeAuditSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
-      // Here you would typically send to your backend API
-      // For now, we'll simulate the email sending
-      const emailData = {
-        type: "Free Audit Request",
-        ...freeAuditForm,
-        timestamp: new Date().toISOString()
-      };
-      
-      console.log("Free Audit Form Data:", emailData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      alert("Thank you! We'll review your information and get back to you within 24 hours.");
+      const recipient = "careers@amigoxcel.com";
+      const subject = encodeURIComponent(
+        `Strategy Call Booking — ${freeAuditForm.name || "New Inquiry"}`
+      );
+      const body = encodeURIComponent(
+        `Name: ${freeAuditForm.name}\n` +
+        `Email: ${freeAuditForm.email}\n` +
+        `Phone: ${freeAuditForm.phone}\n` +
+        `Service Inquiry: ${freeAuditForm.service}\n\n` +
+        `Message:\n${freeAuditForm.message}\n`
+      );
+
+      // Open user's email client pre-filled to careers@amigoxcel.com
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+      await new Promise((resolve) => setTimeout(resolve, 600));
+
+      alert("Thanks! Your email app is opening — just hit send and we'll reply within 24 hours.");
       setShowFreeAuditModal(false);
       setFreeAuditForm({
         name: "",
         email: "",
         phone: "",
-        currentRole: "",
-        experience: "",
-        targetRole: ""
+        service: "",
+        message: ""
       });
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      alert("Something went wrong. Please email careers@amigoxcel.com directly.");
     } finally {
       setIsSubmitting(false);
     }
