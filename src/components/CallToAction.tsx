@@ -13,9 +13,8 @@ const CallToAction = () => {
     name: "",
     email: "",
     phone: "",
-    currentRole: "",
-    experience: "",
-    targetRole: ""
+    service: "",
+    message: ""
   });
 
   const [expertForm, setExpertForm] = useState({
@@ -33,33 +32,36 @@ const CallToAction = () => {
   const handleFreeAuditSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
-      // Here you would typically send to your backend API
-      // For now, we'll simulate the email sending
-      const emailData = {
-        type: "Free Audit Request",
-        ...freeAuditForm,
-        timestamp: new Date().toISOString()
-      };
-      
-      console.log("Free Audit Form Data:", emailData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      alert("Thank you! We'll review your information and get back to you within 24 hours.");
+      const recipient = "careers@amigoxcel.com";
+      const subject = encodeURIComponent(
+        `Strategy Call Booking — ${freeAuditForm.name || "New Inquiry"}`
+      );
+      const body = encodeURIComponent(
+        `Name: ${freeAuditForm.name}\n` +
+        `Email: ${freeAuditForm.email}\n` +
+        `Phone: ${freeAuditForm.phone}\n` +
+        `Service Inquiry: ${freeAuditForm.service}\n\n` +
+        `Message:\n${freeAuditForm.message}\n`
+      );
+
+      // Open user's email client pre-filled to careers@amigoxcel.com
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+      await new Promise((resolve) => setTimeout(resolve, 600));
+
+      alert("Thanks! Your email app is opening — just hit send and we'll reply within 24 hours.");
       setShowFreeAuditModal(false);
       setFreeAuditForm({
         name: "",
         email: "",
         phone: "",
-        currentRole: "",
-        experience: "",
-        targetRole: ""
+        service: "",
+        message: ""
       });
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      alert("Something went wrong. Please email careers@amigoxcel.com directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -163,22 +165,22 @@ const CallToAction = () => {
                 <ul className="space-y-2 text-sm text-left">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                    <span>Comprehensive resume audit</span>
+                    <span>Quick 15-min discovery call</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                    <span>ATS compatibility check</span>
+                    <span>Tailored growth recommendations</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                    <span>Improvement recommendations</span>
+                    <span>Reply within 24 hours at careers@amigoxcel.com</span>
                   </li>
                 </ul>
                 <Button 
                   className="w-full bg-green-600 hover:bg-green-700"
                   onClick={() => setShowFreeAuditModal(true)}
                 >
-                  Get Free Audit
+                  Book a Free Strategy Call
                 </Button>
               </CardContent>
             </Card>
@@ -297,10 +299,11 @@ const CallToAction = () => {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <Phone className="w-4 h-4 inline mr-2" />
-              Phone Number
+              Phone Number *
             </label>
             <input
               type="tel"
+              required
               value={freeAuditForm.phone}
               onChange={(e) => setFreeAuditForm({ ...freeAuditForm, phone: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -311,55 +314,42 @@ const CallToAction = () => {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <FileText className="w-4 h-4 inline mr-2" />
-              Current Role *
+              Service Inquiry For *
             </label>
             <input
               type="text"
               required
-              value={freeAuditForm.currentRole}
-              onChange={(e) => setFreeAuditForm({ ...freeAuditForm, currentRole: e.target.value })}
+              value={freeAuditForm.service}
+              onChange={(e) => setFreeAuditForm({ ...freeAuditForm, service: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="e.g., Software Engineer, Product Manager"
+              placeholder="e.g., Talent, Technology, Training, Media"
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Years of Experience *
+              <MessageSquare className="w-4 h-4 inline mr-2" />
+              Your Message
             </label>
-            <select
-              required
-              value={freeAuditForm.experience}
-              onChange={(e) => setFreeAuditForm({ ...freeAuditForm, experience: e.target.value })}
+            <textarea
+              value={freeAuditForm.message}
+              onChange={(e) => setFreeAuditForm({ ...freeAuditForm, message: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              <option value="">Select experience level</option>
-              <option value="0-2">0-2 years</option>
-              <option value="3-5">3-5 years</option>
-              <option value="6-10">6-10 years</option>
-              <option value="10+">10+ years</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Target Role
-            </label>
-            <input
-              type="text"
-              value={freeAuditForm.targetRole}
-              onChange={(e) => setFreeAuditForm({ ...freeAuditForm, targetRole: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="Role you're targeting (optional)"
+              rows={4}
+              placeholder="Tell us briefly what you need help with..."
             />
           </div>
+
+          <p className="text-xs text-gray-500">
+            We'll reply from <span className="font-medium text-gray-700">careers@amigoxcel.com</span> within 24 hours.
+          </p>
 
           <Button
             type="submit"
             disabled={isSubmitting}
             className="w-full bg-green-600 hover:bg-green-700 text-white py-3"
           >
-            {isSubmitting ? "Submitting..." : "Get Free Audit"}
+            {isSubmitting ? "Opening email..." : "Send & Book Call"}
           </Button>
         </form>
       </Modal>
