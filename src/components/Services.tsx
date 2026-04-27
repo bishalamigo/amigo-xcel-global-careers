@@ -1,97 +1,78 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Users, Code2, GraduationCap, Clapperboard } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Code, Users, FileText, Linkedin, UserCheck, CheckCircle, ArrowRight } from "lucide-react";
-
-
-
+const pillars = [
+  {
+    icon: Users,
+    tag: "Talent",
+    title: "Build the right team before you build anything else.",
+    points: ["Recruitment & staffing", "Offshore hiring", "IT & Non-IT roles"],
+  },
+  {
+    icon: Code2,
+    tag: "Technology",
+    title: "Turn ideas into scalable products.",
+    points: ["Web & app development", "Enterprise systems", "Custom platforms"],
+  },
+  {
+    icon: GraduationCap,
+    tag: "Training",
+    title: "Upgrade skills. Unlock speed.",
+    points: ["Industry-focused programs", "Team upskilling", "Career accelerators"],
+  },
+  {
+    icon: Clapperboard,
+    tag: "Media",
+    title: "Attention is the new currency. We help you earn it.",
+    points: ["Video editing — Reels, YouTube, Ads", "Personal brand content", "Creative campaigns"],
+  },
+];
 
 const Services = () => {
-  const services = [
-    {
-      icon: Code,
-      title: "IT Hiring Solutions",
-      description: "Find the perfect tech talent for your team. From developers to data scientists, we connect you with skilled IT professionals.",
-      features: ["Software Developers", "DevOps Engineers", "Data Scientists", "QA Engineers", "UI/UX Designers"],
-      pricing: "Custom packages • Contact for quote"
-    },
-    {
-      icon: Users,
-      title: "Non-IT Hiring Solutions",
-      description: "Complete recruitment services for all non-technical roles. Marketing, sales, finance, HR, and more.",
-      features: ["Marketing Professionals", "Sales Representatives", "Finance Experts", "HR Specialists", "Administrative Staff"],
-      pricing: "Flexible plans • Volume discounts available"
-    },
-    {
-      icon: FileText,
-      title: "Resume & Profile Optimization",
-      description: "Professional resume writing and LinkedIn optimization to help candidates stand out in the job market.",
-      features: ["ATS-optimized resumes", "LinkedIn profile enhancement", "Cover letter writing", "Interview coaching"],
-      pricing: "Starting from $5 • Depends on service requirements"
-    }
-  ];
-
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-accent/10">
+    <section id="engine" className="py-28 bg-background relative">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-            Our Core Services
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">The Engine</p>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+            The System Behind
+            <span className="block gradient-text">Modern Growth.</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Comprehensive hiring solutions for businesses and professional services for job seekers.
-            <span className="block mt-2 text-primary font-medium">Tailored solutions for every hiring need and career goal.</span>
+          <p className="text-lg text-muted-foreground font-light">
+            Four pillars. One engine. Built to move your business forward.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <Card key={index} className="group relative overflow-hidden hover-lift glass-effect border-border/50 hover:border-primary/20 transition-all duration-300 h-full">
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <CardHeader className="text-center pb-6 relative z-10">
-                <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 transform">
-                  <service.icon className="w-10 h-10 text-primary" />
+        <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {pillars.map((p, i) => (
+            <Card
+              key={i}
+              className="group relative overflow-hidden border-border/60 hover:border-primary/40 bg-card/60 backdrop-blur-sm hover-lift transition-all duration-300"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <CardContent className="p-8 md:p-10 relative z-10">
+                <div className="flex items-start gap-5 mb-6">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all">
+                    <p.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-2">{p.tag}</p>
+                    <h3 className="text-xl md:text-2xl font-semibold leading-snug text-foreground">
+                      {p.title}
+                    </h3>
+                  </div>
                 </div>
-                <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors duration-300">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6 relative z-10">
-                <p className="text-muted-foreground text-center leading-relaxed">{service.description}</p>
-                
-                <div className="space-y-3" id = 'my-target-section'>
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3 group/feature">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 group-hover/feature:scale-110 transition-transform" />
-                      <span className="text-foreground/80 group-hover/feature:text-foreground transition-colors">{feature}</span>
-                    </div>
+                <ul className="space-y-2.5 pl-[76px]">
+                  {p.points.map((pt, idx) => (
+                    <li key={idx} className="text-muted-foreground flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60"></span>
+                      {pt}
+                    </li>
                   ))}
-                </div>
-
-                <div className="glass-effect rounded-lg p-4 text-center border border-primary/10">
-                  <p className="text-sm font-semibold text-primary">{service.pricing}</p>
-                </div>
-
-                {/* <Button variant="premium" className="w-full group/btn">
-                  Get Started
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </Button> */}
+                </ul>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="text-center mt-16">
-          <div className="glass-effect rounded-lg p-8 max-w-2xl mx-auto border border-primary/10">
-            <p className="text-xl text-foreground font-medium italic leading-relaxed">
-              "Your success is our mission - whether you're hiring or job hunting."
-            </p>
-            <div className="flex justify-center mt-4">
-              <div className="flex -space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="w-2 h-2 bg-primary rounded-full"></div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

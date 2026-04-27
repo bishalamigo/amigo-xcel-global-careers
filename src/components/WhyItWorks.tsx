@@ -1,96 +1,47 @@
+import { ArrowRight } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Upload, Search, Zap, TrendingUp } from "lucide-react";
+const shifts = [
+  { from: "Slow hiring", to: "Faster execution" },
+  { from: "Fragile tech", to: "Stronger foundation" },
+  { from: "Stuck skills", to: "Higher performance" },
+  { from: "Invisible brand", to: "More visibility" },
+];
 
 const WhyItWorks = () => {
-  const steps = [
-    {
-      icon: Upload,
-      title: "Upload Your Resume",
-      description: "Share your current resume or LinkedIn profile with us",
-      color: "from-blue-500 to-blue-600"
-    },
-    {
-      icon: Search,
-      title: "Get Free Audit",
-      description: "Receive detailed feedback and improvement recommendations",
-      color: "from-green-500 to-green-600"
-    },
-    {
-      icon: Zap,
-      title: "Expert Enhancement",
-      description: "Our hiring experts craft your perfect resume and profile",
-      color: "from-purple-500 to-purple-600"
-    },
-    {
-      icon: TrendingUp,
-      title: "Start Getting Interviews",
-      description: "Watch your response rate soar with your new materials",
-      color: "from-orange-500 to-orange-600"
-    }
-  ];
-
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Why AmigoXcel Works
+    <section className="py-28 bg-muted/30 relative overflow-hidden">
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2"></div>
+      <div className="container mx-auto px-6 relative">
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">The Transformation</p>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+            What Changes When
+            <span className="block gradient-text">Everything Works Together.</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our proven 4-step process has helped thousands land their dream roles<br />
-            <span className="text-blue-600">Simple, effective, and results-driven</span>
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-6 mb-16">
-          {steps.map((step, index) => (
-            <Card key={index} className="relative group hover:shadow-xl transition-all duration-300 border-0 shadow-lg overflow-hidden">
-              <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${step.color}`}></div>
-              <CardContent className="p-6 text-center space-y-4">
-                <div className="relative">
-                  <div className={`mx-auto w-16 h-16 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                    <step.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-sm font-bold text-gray-700">
-                    {index + 1}
-                  </div>
-                </div>
-                
-                <h3 className="text-xl font-bold text-gray-900">{step.title}</h3>
-                <p className="text-gray-600 text-sm">{step.description}</p>
-              </CardContent>
-            </Card>
+        <div className="max-w-3xl mx-auto space-y-4 mb-16">
+          {shifts.map((s, i) => (
+            <div
+              key={i}
+              className="group flex items-center gap-4 md:gap-8 p-6 md:p-8 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/60 hover:border-primary/40 transition-all hover-lift"
+            >
+              <span className="flex-1 text-lg md:text-xl text-muted-foreground line-through decoration-destructive/40">
+                {s.from}
+              </span>
+              <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-primary flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+              <span className="flex-1 text-lg md:text-2xl font-semibold text-foreground text-right">
+                {s.to}
+              </span>
+            </div>
           ))}
         </div>
 
-        {/* Process Flow Visualization */}
-        <div className="relative">
-          <div className="flex justify-center items-center space-x-4 mb-8">
-            <div className="hidden md:block w-32 h-0.5 bg-gradient-to-r from-blue-200 to-blue-400"></div>
-            <div className="text-center bg-white rounded-full px-6 py-3 shadow-lg">
-              <span className="text-lg font-semibold text-gray-700">Average Timeline: 3-7 days</span>
-            </div>
-            <div className="hidden md:block w-32 h-0.5 bg-gradient-to-r from-blue-400 to-blue-200"></div>
-          </div>
-        </div>
-
-        {/* Success Metrics */}
-        <div className="bg-white rounded-2xl p-8 shadow-lg">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">3x</div>
-              <div className="text-gray-600">More Interview Invites</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">70%</div>
-              <div className="text-gray-600">Faster Job Placement</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">25%</div>
-              <div className="text-gray-600">Higher Salary Offers</div>
-            </div>
-          </div>
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-2xl md:text-3xl font-semibold leading-snug">
+            Growth stops being random.
+            <span className="block gradient-text mt-2">It becomes predictable.</span>
+          </p>
         </div>
       </div>
     </section>
