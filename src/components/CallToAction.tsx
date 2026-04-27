@@ -165,22 +165,22 @@ const CallToAction = () => {
                 <ul className="space-y-2 text-sm text-left">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                    <span>Comprehensive resume audit</span>
+                    <span>Quick 15-min discovery call</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                    <span>ATS compatibility check</span>
+                    <span>Tailored growth recommendations</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                    <span>Improvement recommendations</span>
+                    <span>Reply within 24 hours at careers@amigoxcel.com</span>
                   </li>
                 </ul>
                 <Button 
                   className="w-full bg-green-600 hover:bg-green-700"
                   onClick={() => setShowFreeAuditModal(true)}
                 >
-                  Get Free Audit
+                  Book a Free Strategy Call
                 </Button>
               </CardContent>
             </Card>
