@@ -15,9 +15,6 @@ const WhyItWorks = () => {
       <div className="container mx-auto px-6 relative">
         <div className="text-center mb-20 max-w-3xl mx-auto">
           <Reveal>
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">The Transformation</p>
-          </Reveal>
-          <Reveal delay={80}>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               What Changes When
               <span className="block gradient-text">Everything Works Together.</span>

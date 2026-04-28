@@ -36,7 +36,7 @@ const Hero = () => {
           >
             <Sparkles className="w-3.5 h-3.5 mr-2 text-primary" />
             <span className="text-xs font-medium tracking-wide uppercase">
-              Growth Partner — Not a Service Provider
+              Growth Partner, Not a Service Provider
             </span>
           </Badge>
 
@@ -53,7 +53,7 @@ const Hero = () => {
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light animate-fade-in"
             style={{ animationDelay: '260ms', animationFillMode: 'backwards' }}
           >
-            We bring together talent, technology, training, and creative media — so you can build faster, scale smarter, and stand out globally.
+            We bring together talent, technology, training, and creative media so you can build faster, scale smarter, and stand out globally.
           </p>
 
           <div

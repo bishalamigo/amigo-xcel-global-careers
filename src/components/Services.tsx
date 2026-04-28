@@ -25,7 +25,7 @@ const pillars = [
     icon: Clapperboard,
     tag: "Media",
     title: "Attention is the new currency. We help you earn it.",
-    points: ["Video editing — Reels, YouTube, Ads", "Personal brand content", "Creative campaigns"],
+    points: ["Video editing for Reels, YouTube, Ads", "Personal brand content", "Creative campaigns"],
   },
 ];
 
@@ -35,9 +35,6 @@ const Services = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-20 max-w-3xl mx-auto">
           <Reveal>
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">The Engine</p>
-          </Reveal>
-          <Reveal delay={80}>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
               The System Behind
               <span className="block gradient-text">Modern Growth.</span>

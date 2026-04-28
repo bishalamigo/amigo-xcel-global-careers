@@ -81,9 +81,6 @@ const CallToAction = () => {
         <div className="container mx-auto px-6 relative">
           {/* Main CTA */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-blue-400 mb-6">
-              Let's Talk
-            </p>
             <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight">
               Let's Build
               <span className="block bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text text-transparent">
@@ -92,7 +89,7 @@ const CallToAction = () => {
             </h2>
             <p className="text-lg md:text-xl text-slate-300 mb-8 font-light leading-relaxed">
               Whether you're starting out or scaling up, we bring the pieces together
-              so your business moves forward — faster.
+              so your business moves forward, faster.
             </p>
           </div>
 
@@ -110,7 +107,7 @@ const CallToAction = () => {
                 <ul className="space-y-2 text-sm text-left max-w-sm mx-auto">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>15-minute discovery call — no pressure</span>
+                    <span>15-minute discovery call, no pressure</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
