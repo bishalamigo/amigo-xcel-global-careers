@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Code2, GraduationCap, Clapperboard } from "lucide-react";
+import Reveal from "./Reveal";
 
 const pillars = [
   {
