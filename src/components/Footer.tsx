@@ -63,7 +63,7 @@ const Footer = () => {
             </h4>
             <div className="flex items-center gap-4">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/108184787/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -72,7 +72,7 @@ const Footer = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/amigoxcel/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
