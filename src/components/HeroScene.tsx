@@ -12,16 +12,16 @@ const Knot = () => {
   });
   return (
     <Float speed={1.2} rotationIntensity={0.4} floatIntensity={1.2}>
-      <mesh ref={ref} scale={1.4}>
+      <mesh ref={ref} scale={0.8} position={[2.4, 0.2, -0.5]}>
         <torusKnotGeometry args={[1, 0.32, 220, 32]} />
         <MeshDistortMaterial
           color="#22d3ee"
           emissive="#0e7490"
-          emissiveIntensity={0.4}
-          roughness={0.18}
-          metalness={0.85}
-          distort={0.32}
-          speed={1.4}
+          emissiveIntensity={0.15}
+          roughness={0.45}
+          metalness={0.7}
+          distort={0.28}
+          speed={1.2}
         />
       </mesh>
     </Float>

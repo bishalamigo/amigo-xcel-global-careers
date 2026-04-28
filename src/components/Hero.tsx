@@ -17,15 +17,16 @@ const Hero = () => {
       <div className="absolute inset-0 mesh-bg opacity-90" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,hsl(var(--foreground)/0.06)_1px,transparent_0)] bg-[size:36px_36px] [mask-image:radial-gradient(ellipse_at_center,#000_30%,transparent_75%)]" />
 
-      {/* 3D scene */}
-      <div className="absolute inset-0 z-0 opacity-90">
+      {/* 3D scene — pushed back, dimmed */}
+      <div className="absolute inset-0 z-0 opacity-40 blur-[2px]">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
       </div>
 
-      {/* Bottom fade so content section blends */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-[1]" />
+      {/* Dark vignette + radial spotlight behind text for legibility */}
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(ellipse_at_center,hsl(var(--background)/0.85)_0%,hsl(var(--background)/0.6)_40%,transparent_75%)]" />
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-background/60 via-transparent to-background" />
 
       <div className="container mx-auto px-6 relative z-10 py-24 pointer-events-none">
         <div className="max-w-5xl mx-auto text-center">
