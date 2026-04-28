@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Reveal from "./Reveal";
 
 const shifts = [
   { from: "Slow hiring", to: "Faster execution" },

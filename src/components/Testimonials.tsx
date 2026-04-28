@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Globe2, Briefcase, Users2 } from "lucide-react";
+import Reveal from "./Reveal";
 
 const proof = [
   { icon: Users2, stat: "Growing", label: "Roster of clients scaling their teams" },

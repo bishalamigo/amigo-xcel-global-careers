@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Rocket, User, Building2, Layers, ShoppingBag } from "lucide-react";
+import Reveal from "./Reveal";
 
 const audiences = [
   { icon: Rocket, title: "Startups", desc: "Building from scratch, ready to move fast." },
