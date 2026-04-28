@@ -13,7 +13,7 @@ const Footer = () => {
               Amigo<span className="text-primary">Xcel</span>
             </h3>
             <p className="text-sm leading-relaxed max-w-md text-slate-400">
-              The engine behind your growth — bringing together talent, technology,
+              The engine behind your growth, bringing together talent, technology,
               training, and creative media so businesses can scale smarter.
             </p>
             <div className="flex items-center gap-2 mt-6 text-sm">

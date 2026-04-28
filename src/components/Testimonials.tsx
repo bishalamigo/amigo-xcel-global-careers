@@ -41,7 +41,7 @@ const Testimonials = () => {
           <div className="max-w-3xl mx-auto">
             <Card className="bg-card border-border/60 overflow-hidden glow-border">
               <CardContent className="p-8 md:p-12">
-                <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">Case Snapshot</p>
+                
                 <blockquote className="text-xl md:text-2xl font-light leading-relaxed text-foreground">
                   "We came in for hiring. Stayed for the engine. Within months, our team, content, and tech were finally moving in the same direction."
                 </blockquote>
