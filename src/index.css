@@ -8,45 +8,45 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Enhanced color system inspired by tech giants */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* AmigoXcel — Dark navy premium with blue-green accent */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 222 40% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
 
-    /* Primary colors - inspired by Tesla's bold approach */
-    --primary: 219 78% 51%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 219 78% 45%;
-    --primary-glow: 219 78% 70%;
+    /* Primary — electric blue-green */
+    --primary: 190 95% 55%;
+    --primary-foreground: 222 47% 6%;
+    --primary-hover: 190 95% 50%;
+    --primary-glow: 170 85% 60%;
 
-    /* Secondary colors - Microsoft Fluent inspired */
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary surface */
+    --secondary: 222 35% 13%;
+    --secondary-foreground: 210 40% 98%;
 
-    /* Muted colors for subtle elements */
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted */
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 70%;
 
-    /* Accent colors - Meta/Netflix inspired */
-    --accent: 219 78% 96%;
-    --accent-foreground: 219 78% 51%;
+    /* Accent — soft teal */
+    --accent: 190 60% 18%;
+    --accent-foreground: 190 95% 75%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 219 78% 51%;
+    --border: 222 30% 16%;
+    --input: 222 30% 14%;
+    --ring: 190 95% 55%;
 
     /* Enhanced design tokens */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
-    --gradient-hero: linear-gradient(135deg, hsl(219 78% 51% / 0.1), hsl(219 78% 70% / 0.05));
+    --gradient-hero: linear-gradient(135deg, hsl(190 95% 55% / 0.18), hsl(170 85% 60% / 0.08));
     
     /* Shadow system - inspired by Material Design */
     --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
@@ -206,4 +206,66 @@ All colors MUST be HSL.
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  /* Animated conic mesh background */
+  .mesh-bg {
+    background:
+      radial-gradient(at 20% 30%, hsl(190 95% 55% / 0.18) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, hsl(170 85% 60% / 0.15) 0px, transparent 50%),
+      radial-gradient(at 60% 80%, hsl(220 90% 60% / 0.15) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, hsl(190 95% 55% / 0.12) 0px, transparent 50%);
+    animation: mesh-drift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes mesh-drift {
+    0%   { background-position: 0% 0%, 100% 0%, 50% 100%, 0% 100%; }
+    100% { background-position: 10% 10%, 90% 10%, 60% 90%, 5% 95%; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Glow border on hover */
+  .glow-border {
+    position: relative;
+  }
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.6), hsl(var(--primary-glow) / 0.2), transparent 60%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .glow-border:hover::before { opacity: 1; }
+
+  /* Subtle floating */
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  .float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+  /* Marquee */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee { animation: marquee 30s linear infinite; }
 }
