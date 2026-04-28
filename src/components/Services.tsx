@@ -34,45 +34,52 @@ const Services = () => {
     <section id="engine" className="py-28 bg-background relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20 max-w-3xl mx-auto">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">The Engine</p>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
-            The System Behind
-            <span className="block gradient-text">Modern Growth.</span>
-          </h2>
-          <p className="text-lg text-muted-foreground font-light">
-            Four pillars. One engine. Built to move your business forward.
-          </p>
+          <Reveal>
+            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">The Engine</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+              The System Behind
+              <span className="block gradient-text">Modern Growth.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="text-lg text-muted-foreground font-light">
+              Four pillars. One engine. Built to move your business forward.
+            </p>
+          </Reveal>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {pillars.map((p, i) => (
-            <Card
-              key={i}
-              className="group relative overflow-hidden border-border/60 hover:border-primary/40 bg-card/60 backdrop-blur-sm hover-lift transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <CardContent className="p-8 md:p-10 relative z-10">
-                <div className="flex items-start gap-5 mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all">
-                    <p.icon className="w-7 h-7 text-primary" />
+            <Reveal key={i} delay={i * 90}>
+              <Card
+                className="group relative overflow-hidden border-border/60 hover:border-primary/50 bg-card/60 backdrop-blur-sm hover-lift glow-border transition-all duration-300 h-full"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <CardContent className="p-8 md:p-10 relative z-10">
+                  <div className="flex items-start gap-5 mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 group-hover:shadow-glow transition-all duration-300">
+                      <p.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-2">{p.tag}</p>
+                      <h3 className="text-xl md:text-2xl font-semibold leading-snug text-foreground">
+                        {p.title}
+                      </h3>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-2">{p.tag}</p>
-                    <h3 className="text-xl md:text-2xl font-semibold leading-snug text-foreground">
-                      {p.title}
-                    </h3>
-                  </div>
-                </div>
-                <ul className="space-y-2.5 pl-[76px]">
-                  {p.points.map((pt, idx) => (
-                    <li key={idx} className="text-muted-foreground flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60"></span>
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                  <ul className="space-y-2.5 pl-[76px]">
+                    {p.points.map((pt, idx) => (
+                      <li key={idx} className="text-muted-foreground flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary/70 shadow-[0_0_8px_hsl(var(--primary))]"></span>
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </div>
