@@ -14,9 +14,6 @@ const Testimonials = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-20 max-w-3xl mx-auto">
           <Reveal>
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">Social Proof</p>
-          </Reveal>
-          <Reveal delay={80}>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               Built on Trust.
               <span className="block gradient-text">Growing Every Day.</span>
@@ -48,7 +45,7 @@ const Testimonials = () => {
                 <blockquote className="text-xl md:text-2xl font-light leading-relaxed text-foreground">
                   "We came in for hiring. Stayed for the engine. Within months, our team, content, and tech were finally moving in the same direction."
                 </blockquote>
-                <p className="mt-6 text-sm text-muted-foreground">— Founder, growing digital brand</p>
+                <p className="mt-6 text-sm text-muted-foreground">Founder, growing digital brand</p>
               </CardContent>
             </Card>
           </div>

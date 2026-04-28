@@ -7,7 +7,7 @@ const audiences = [
   { icon: User, title: "Founders & Personal Brands", desc: "Turning ideas into authority and reach." },
   { icon: Building2, title: "IT & Recruitment Companies", desc: "Scaling delivery without scaling chaos." },
   { icon: Layers, title: "Agencies", desc: "Need reliable white-label support." },
-  { icon: ShoppingBag, title: "E-commerce & Digital-First Brands", desc: "Growing with content, tech, and talent." },
+  { icon: ShoppingBag, title: "E-commerce and Digital-First Brands", desc: "Growing with content, tech, and talent." },
 ];
 
 const WhoWeHelp = () => {
@@ -16,9 +16,6 @@ const WhoWeHelp = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-20 max-w-3xl mx-auto">
           <Reveal>
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-6">Who It's For</p>
-          </Reveal>
-          <Reveal delay={80}>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               Built for Those Who Are
               <span className="block gradient-text">Ready to Scale.</span>
