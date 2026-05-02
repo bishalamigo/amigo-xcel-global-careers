@@ -1,6 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Code2, GraduationCap, Clapperboard } from "lucide-react";
 import Reveal from "./Reveal";
+import { Suspense, lazy } from "react";
+
+const AmbientScene = lazy(() => import("./AmbientScene"));
 
 const pillars = [
   {
@@ -31,8 +34,12 @@ const pillars = [
 
 const Services = () => {
   return (
-    <section id="engine" className="py-28 bg-background relative">
-      <div className="container mx-auto px-6">
+    <section id="engine" className="py-28 bg-background relative overflow-hidden">
+      <div className="absolute inset-0 opacity-25 pointer-events-none">
+        <Suspense fallback={null}><AmbientScene /></Suspense>
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background pointer-events-none" />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-20 max-w-3xl mx-auto">
           <Reveal>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
