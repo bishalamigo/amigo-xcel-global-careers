@@ -106,9 +106,10 @@ const Particles = ({ count = 120 }: { count?: number }) => {
 
 const Orb = ({ position, color, scale }: { position: [number, number, number]; color: string; scale: number }) => (
   <Float speed={2} rotationIntensity={0.6} floatIntensity={2}>
-    <Sphere args={[scale, 32, 32]} position={position}>
+    <mesh position={position}>
+      <sphereGeometry args={[scale, 32, 32]} />
       <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.7} roughness={0.3} />
-    </Sphere>
+    </mesh>
   </Float>
 );
 
