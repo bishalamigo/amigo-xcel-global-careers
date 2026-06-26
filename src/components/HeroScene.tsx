@@ -1,6 +1,6 @@
 import { Suspense, useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Sphere, Icosahedron, Torus } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
 const Knot = () => {
@@ -14,14 +14,12 @@ const Knot = () => {
     <Float speed={1.2} rotationIntensity={0.4} floatIntensity={1.2}>
       <mesh ref={ref} scale={0.85} position={[2.4, 0.2, -0.5]}>
         <torusKnotGeometry args={[1, 0.32, 220, 32]} />
-        <MeshDistortMaterial
+        <meshStandardMaterial
           color="#22d3ee"
           emissive="#0e7490"
           emissiveIntensity={0.2}
           roughness={0.35}
           metalness={0.85}
-          distort={0.32}
-          speed={1.4}
         />
       </mesh>
     </Float>
