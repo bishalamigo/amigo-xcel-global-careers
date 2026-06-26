@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import Hook from "../components/Hook";
 import StatsBar from "../components/StatsBar";
 import Services from "../components/Services";
-import TrainingPrograms from "../components/TrainingPrograms";
+
 import WhyItWorks from "../components/WhyItWorks";
 import WhoWeHelp from "../components/WhoWeHelp";
 import LogoMarquee from "../components/LogoMarquee";
@@ -21,7 +21,6 @@ const Index = () => {
         <Hook />
         <StatsBar />
         <section id="services"><Services /></section>
-        <TrainingPrograms />
         <section id="why"><WhyItWorks /></section>
         <section id="audience"><WhoWeHelp /></section>
         <section id="proof"><Testimonials /></section>
