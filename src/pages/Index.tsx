@@ -21,7 +21,6 @@ const Index = () => {
         <Hook />
         <StatsBar />
         <section id="services"><Services /></section>
-        <TrainingPrograms />
         <section id="why"><WhyItWorks /></section>
         <section id="audience"><WhoWeHelp /></section>
         <section id="proof"><Testimonials /></section>
