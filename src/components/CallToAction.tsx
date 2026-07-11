@@ -267,7 +267,7 @@ const CallToAction = () => {
               </p>
 
               <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? "Sending..." : "Send & Book Call"}
+                {isSubmitting ? "Sending..." : "Book My Call"}
               </Button>
             </form>
           </div>
