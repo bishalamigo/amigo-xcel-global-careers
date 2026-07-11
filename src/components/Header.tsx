@@ -65,7 +65,7 @@ const Header = () => {
         <div className="hidden md:block">
           <Button asChild size="sm">
             <a href="#contact" onClick={(e) => handleNav(e, "#contact")}>
-              Book a Call
+              Book My Call
             </a>
           </Button>
         </div>
