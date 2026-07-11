@@ -7,75 +7,58 @@ All colors MUST be HSL.
 */
 
 @layer base {
+  /* AmigoXcel Design System
+     Light base = warm off-white (#F5F3EF)
+     Dark sections = ink (#0B0D12) via `.dark` wrapper class
+     Single accent = confident teal (#2DD4BF)
+  */
   :root {
-    /* AmigoXcel — Dark navy premium with blue-green accent */
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    /* Warm off-white base */
+    --background: 38 24% 95%;         /* #F5F3EF */
+    --foreground: 220 15% 12%;        /* #1A1D23 */
 
-    --card: 222 40% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 12%;
 
-    --popover: 222 47% 7%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 12%;
 
-    /* Primary — electric blue-green */
-    --primary: 190 95% 55%;
-    --primary-foreground: 222 47% 6%;
-    --primary-hover: 190 95% 50%;
-    --primary-glow: 170 85% 60%;
+    /* Accent — confident teal */
+    --primary: 172 66% 50%;           /* #2DD4BF */
+    --primary-foreground: 222 22% 6%;
+    --primary-hover: 172 70% 42%;
+    --primary-glow: 172 76% 62%;
 
-    /* Secondary surface */
-    --secondary: 222 35% 13%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 38 20% 90%;
+    --secondary-foreground: 220 15% 12%;
 
-    /* Muted */
-    --muted: 222 30% 14%;
-    --muted-foreground: 215 20% 70%;
+    --muted: 38 18% 92%;
+    --muted-foreground: 220 9% 40%;   /* #6B7280 tuned for AA */
 
-    /* Accent — soft teal */
-    --accent: 190 60% 18%;
-    --accent-foreground: 190 95% 75%;
+    --accent: 172 66% 92%;
+    --accent-foreground: 172 66% 20%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 222 30% 16%;
-    --input: 222 30% 14%;
-    --ring: 190 95% 55%;
+    --border: 220 13% 86%;
+    --input: 220 13% 88%;
+    --ring: 172 66% 50%;
 
-    /* Enhanced design tokens */
+    /* Ink tokens used explicitly for premium dark bands */
+    --ink: 222 22% 6%;                /* #0B0D12 */
+    --ink-foreground: 0 0% 98%;       /* #FAFAFA */
+
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
-    --gradient-hero: linear-gradient(135deg, hsl(190 95% 55% / 0.18), hsl(170 85% 60% / 0.08));
-    
-    /* Shadow system - inspired by Material Design */
-    --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -1px hsl(var(--foreground) / 0.06);
-    --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -2px hsl(var(--foreground) / 0.05);
-    --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 10px 10px -5px hsl(var(--foreground) / 0.04);
-    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
-    
-    /* Typography scale - Google's approach */
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 1.875rem;
-    --font-size-4xl: 2.25rem;
-    --font-size-5xl: 3rem;
-    
-    /* Spacing scale - consistent system */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
-    --spacing-3xl: 4rem;
-    
-    /* Animation timing - Netflix/Amazon inspired */
+    --gradient-hero: linear-gradient(135deg, hsl(172 66% 50% / 0.18), hsl(172 76% 62% / 0.08));
+
+    --shadow-sm: 0 1px 2px 0 hsl(222 22% 6% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(222 22% 6% / 0.08), 0 2px 4px -1px hsl(222 22% 6% / 0.04);
+    --shadow-lg: 0 10px 15px -3px hsl(222 22% 6% / 0.08), 0 4px 6px -2px hsl(222 22% 6% / 0.04);
+    --shadow-xl: 0 20px 25px -5px hsl(222 22% 6% / 0.10), 0 10px 10px -5px hsl(222 22% 6% / 0.04);
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.28);
+
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -84,67 +67,48 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 172 66% 50%;
   }
 
   .dark {
-    /* Dark mode - Netflix/Tesla inspired deep blacks */
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Ink dark band — same teal accent, never pure black or pure white */
+    --background: 222 22% 6%;         /* #0B0D12 */
+    --foreground: 0 0% 98%;           /* #FAFAFA */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 222 20% 9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 222 22% 7%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 219 78% 61%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --primary-hover: 219 78% 55%;
-    --primary-glow: 219 78% 70%;
+    --primary: 172 66% 50%;
+    --primary-foreground: 222 22% 6%;
+    --primary-hover: 172 76% 58%;
+    --primary-glow: 172 76% 62%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 222 18% 14%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 222 18% 14%;
+    --muted-foreground: 220 12% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 172 40% 18%;
+    --accent-foreground: 172 66% 78%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 219 78% 61%;
+    --border: 222 18% 18%;
+    --input: 222 18% 16%;
+    --ring: 172 66% 50%;
 
-    /* Dark mode specific enhancements */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
-    --gradient-hero: linear-gradient(135deg, hsl(219 78% 61% / 0.15), hsl(219 78% 70% / 0.08));
-    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.4);
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.35);
   }
 }
 
@@ -207,13 +171,13 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
   }
 
-  /* Animated conic mesh background */
+  /* Animated conic mesh background — teal accent only */
   .mesh-bg {
     background:
-      radial-gradient(at 20% 30%, hsl(190 95% 55% / 0.18) 0px, transparent 50%),
-      radial-gradient(at 80% 20%, hsl(170 85% 60% / 0.15) 0px, transparent 50%),
-      radial-gradient(at 60% 80%, hsl(220 90% 60% / 0.15) 0px, transparent 50%),
-      radial-gradient(at 10% 90%, hsl(190 95% 55% / 0.12) 0px, transparent 50%);
+      radial-gradient(at 20% 30%, hsl(172 66% 50% / 0.18) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, hsl(172 76% 62% / 0.14) 0px, transparent 50%),
+      radial-gradient(at 60% 80%, hsl(172 66% 50% / 0.12) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, hsl(172 76% 62% / 0.10) 0px, transparent 50%);
     animation: mesh-drift 18s ease-in-out infinite alternate;
   }
 
