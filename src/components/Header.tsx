@@ -97,7 +97,7 @@ const Header = () => {
             <li>
               <Button asChild className="w-full">
                 <a href="#contact" onClick={(e) => handleNav(e, "#contact")}>
-                  Book a Call
+                  Book My Call
                 </a>
               </Button>
             </li>
