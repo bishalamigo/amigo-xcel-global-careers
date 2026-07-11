@@ -75,43 +75,40 @@ const CallToAction = () => {
     <>
       <section
         id="contact"
-        className="py-28 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden"
+        className="py-28 bg-background text-foreground relative overflow-hidden"
       >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-6 relative">
           {/* Main CTA */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight">
               Let's Build
-              <span className="block bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text text-transparent">
-                What's Next.
-              </span>
+              <span className="block gradient-text">What's Next.</span>
             </h2>
-            <p className="text-lg md:text-xl text-slate-300 mb-8 font-light leading-relaxed">
-              Whether you're starting out or scaling up, we bring the pieces together
-              so your business moves forward, faster.
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
+              Tell us what you need. We'll reply from careers@amigoxcel.com within 24 hours.
             </p>
           </div>
 
           {/* Single primary CTA card */}
           <div className="max-w-xl mx-auto mb-16">
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
+            <Card className="bg-card border-border">
               <CardContent className="p-8 text-center space-y-6">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle className="w-8 h-8 text-primary-foreground" />
                 </div>
                 <h3 className="text-2xl font-bold">Book a Free Strategy Call</h3>
-                <p className="text-slate-300">
-                  Tell us where you are. We'll show you what's possible.
+                <p className="text-muted-foreground">
+                  A 15-minute call. No slides, no pressure, just a straight answer on whether we can help.
                 </p>
-                <ul className="space-y-2 text-sm text-left max-w-sm mx-auto">
+                <ul className="space-y-2 text-sm text-left max-w-sm mx-auto text-foreground/90">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>15-minute discovery call, no pressure</span>
+                    <span>15-minute discovery call over Zoom or Google Meet</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>Tailored growth recommendations</span>
+                    <span>A short written plan sent after the call</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
@@ -123,7 +120,7 @@ const CallToAction = () => {
                   className="w-full"
                   onClick={() => setShowModal(true)}
                 >
-                  Book Your Free Call
+                  Book My Free Call
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </CardContent>
@@ -132,12 +129,12 @@ const CallToAction = () => {
 
           {/* Global Reach */}
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
-              <Globe className="w-5 h-5 text-blue-400" />
-              <span className="text-sm">Serving businesses worldwide</span>
+            <div className="inline-flex items-center gap-2 bg-card border border-border rounded-full px-6 py-3 mb-6">
+              <Globe className="w-5 h-5 text-primary" />
+              <span className="text-sm text-foreground">Working with clients in 8 countries</span>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3 text-sm opacity-80 max-w-3xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-3 text-sm text-muted-foreground max-w-3xl mx-auto">
               {[
                 "Australia",
                 "United States",
@@ -150,7 +147,7 @@ const CallToAction = () => {
               ].map((c) => (
                 <span
                   key={c}
-                  className="bg-white/10 px-4 py-2 rounded-full"
+                  className="bg-card border border-border px-4 py-2 rounded-full"
                 >
                   {c}
                 </span>
