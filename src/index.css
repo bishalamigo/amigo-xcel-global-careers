@@ -171,13 +171,13 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
   }
 
-  /* Animated conic mesh background */
+  /* Animated conic mesh background — teal accent only */
   .mesh-bg {
     background:
-      radial-gradient(at 20% 30%, hsl(190 95% 55% / 0.18) 0px, transparent 50%),
-      radial-gradient(at 80% 20%, hsl(170 85% 60% / 0.15) 0px, transparent 50%),
-      radial-gradient(at 60% 80%, hsl(220 90% 60% / 0.15) 0px, transparent 50%),
-      radial-gradient(at 10% 90%, hsl(190 95% 55% / 0.12) 0px, transparent 50%);
+      radial-gradient(at 20% 30%, hsl(172 66% 50% / 0.18) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, hsl(172 76% 62% / 0.14) 0px, transparent 50%),
+      radial-gradient(at 60% 80%, hsl(172 66% 50% / 0.12) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, hsl(172 76% 62% / 0.10) 0px, transparent 50%);
     animation: mesh-drift 18s ease-in-out infinite alternate;
   }
 
