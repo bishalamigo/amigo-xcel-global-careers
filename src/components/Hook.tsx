@@ -7,15 +7,15 @@ const Hook = () => {
       <div className="container mx-auto px-6 relative">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-10 leading-tight">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-10 leading-tight text-foreground">
               Growth Isn't One Problem.
-              <span className="block text-muted-foreground mt-2">It's Everything.</span>
+              <span className="block gradient-text mt-2">It's Everything.</span>
             </h2>
           </Reveal>
-          <div className="space-y-5 text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
+          <div className="space-y-5 text-lg md:text-xl text-foreground/80 leading-relaxed">
             <Reveal delay={120}><p>You don't just need developers, content, or hiring support.</p></Reveal>
             <Reveal delay={200}>
-              <p className="text-foreground font-normal">
+              <p className="text-foreground font-medium">
                 You need everything working together, at the right time and in the right way.
               </p>
             </Reveal>
