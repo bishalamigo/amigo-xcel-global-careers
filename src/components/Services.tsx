@@ -34,7 +34,7 @@ const pillars = [
 
 const Services = () => {
   return (
-    <section id="engine" className="py-28 bg-background relative overflow-hidden">
+    <section id="services" className="py-28 bg-background relative overflow-hidden">
       <div className="absolute inset-0 opacity-25 pointer-events-none">
         <Suspense fallback={null}><AmbientScene /></Suspense>
       </div>

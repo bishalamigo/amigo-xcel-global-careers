@@ -64,7 +64,7 @@ const Hero = () => {
               Book My Free Call
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="glass" size="xl" onClick={() => scrollTo('engine')}>
+            <Button variant="glass" size="xl" onClick={() => scrollTo('services')}>
               See My Options
             </Button>
           </div>
