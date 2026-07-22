@@ -1,4 +1,5 @@
 import { Mail, Globe, Linkedin, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -83,8 +84,8 @@ const Footer = () => {
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>© {year} AmigoXcel. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-primary transition-colors">Privacy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms</a>
+            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors">Terms</Link>
           </div>
         </div>
       </div>

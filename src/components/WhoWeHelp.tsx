@@ -12,7 +12,7 @@ const audiences = [
 
 const WhoWeHelp = () => {
   return (
-    <section className="py-28 bg-background">
+    <section id="audience" className="py-28 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20 max-w-3xl mx-auto">
           <Reveal>
