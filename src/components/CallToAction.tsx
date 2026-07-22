@@ -59,6 +59,19 @@ const CallToAction = () => {
       });
 
       if (error) throw error;
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "e19ddb87-5689-4122-9b38-8b05b380c881",
+          subject: "New Enquiry from AmigoXcel Website",
+          name: parsed.data.name,
+          email: parsed.data.email,
+          phone: parsed.data.phone,
+          service: parsed.data.service,
+          message: parsed.data.message,
+        }),
+      });
 
       toast.success("Thanks! We'll reply from careers@amigoxcel.com within 24 hours.");
       setForm(initialForm);
