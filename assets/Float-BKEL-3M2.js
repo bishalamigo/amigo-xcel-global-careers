@@ -1,4 +1,4 @@
-import{r as ke,g as ex,j as yi}from"./index-CF_R0Gi2.js";/**
+import{r as ke,g as ex,j as yi}from"./index-B_NINWuK.js";/**
  * @license
  * Copyright 2010-2023 Three.js Authors
  * SPDX-License-Identifier: MIT
