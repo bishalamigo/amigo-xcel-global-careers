@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { z } from "zod";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -11,76 +9,44 @@ import {
   Mail,
   User,
   Phone,
-  FileText,
   MessageSquare,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(200),
-  email: z.string().trim().email("Enter a valid email").max(320),
-  phone: z.string().trim().min(5, "Enter a valid phone number").max(50),
-  service: z.string().trim().min(1, "Tell us what you need").max(200),
-  message: z.string().trim().max(5000).optional(),
-});
-
-type ContactForm = z.infer<typeof contactSchema>;
-
-const initialForm: ContactForm = {
-  name: "",
-  email: "",
-  phone: "",
-  service: "",
-  message: "",
-};
+type Status = "idle" | "loading" | "success" | "error";
 
 const CallToAction = () => {
   const [showModal, setShowModal] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState<ContactForm>(initialForm);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
 
-    const parsed = contactSchema.safeParse(form);
-    if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message || "Please check the form");
-      return;
-    }
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    formData.append("access_key", "e19ddb87-5689-4122-9b38-8b05b380c881");
+    formData.append("subject", "New Enquiry from AmigoXcel Website");
+    formData.append("from_name", "AmigoXcel Website");
 
-    setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
-        name: parsed.data.name,
-        email: parsed.data.email,
-        phone: parsed.data.phone,
-        service: parsed.data.service,
-        message: parsed.data.message || null,
-      });
-
-      if (error) throw error;
-      await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_key: "e19ddb87-5689-4122-9b38-8b05b380c881",
-          subject: "New Enquiry from AmigoXcel Website",
-          name: parsed.data.name,
-          email: parsed.data.email,
-          phone: parsed.data.phone,
-          service: parsed.data.service,
-          message: parsed.data.message,
-        }),
+        body: formData,
       });
+      const result = await response.json();
 
-      toast.success("Thanks! We'll reply from careers@amigoxcel.com within 24 hours.");
-      setForm(initialForm);
-      setShowModal(false);
-    } catch (err) {
-      console.error(err);
-      toast.error("Something went wrong. Please email careers@amigoxcel.com directly.");
-    } finally {
-      setIsSubmitting(false);
+      if (result.success) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+        setErrorMsg(result.message || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please check your connection and try again.");
     }
   };
 
@@ -92,7 +58,6 @@ const CallToAction = () => {
       >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-6 relative">
-          {/* Main CTA */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight">
               Let's Build
@@ -103,7 +68,6 @@ const CallToAction = () => {
             </p>
           </div>
 
-          {/* Single primary CTA card */}
           <div className="max-w-xl mx-auto mb-16">
             <Card className="bg-card border-border">
               <CardContent className="p-8 text-center space-y-6">
@@ -140,7 +104,6 @@ const CallToAction = () => {
             </Card>
           </div>
 
-          {/* Global Reach */}
           <div className="text-center">
             <div className="inline-flex items-center gap-2 bg-card border border-border rounded-full px-6 py-3 mb-6">
               <Globe className="w-5 h-5 text-primary" />
@@ -170,11 +133,14 @@ const CallToAction = () => {
         </div>
       </section>
 
-      {/* Contact Modal */}
       {showModal && (
         <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-          onClick={() => setShowModal(false)}
+          onClick={() => {
+            setShowModal(false);
+            setStatus("idle");
+            setErrorMsg("");
+          }}
         >
           <div
             className="bg-background text-foreground rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl"
@@ -183,7 +149,11 @@ const CallToAction = () => {
             <div className="flex justify-between items-center p-6 border-b border-border">
               <h2 className="text-xl font-bold">Book a Free Strategy Call</h2>
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  setStatus("idle");
+                  setErrorMsg("");
+                }}
                 aria-label="Close"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -193,95 +163,96 @@ const CallToAction = () => {
 
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
                   <User className="w-4 h-4 inline mr-2" />
                   Full Name *
                 </label>
                 <input
                   type="text"
+                  id="name"
+                  name="name"
                   required
                   maxLength={200}
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                   placeholder="Your full name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
                   <Mail className="w-4 h-4 inline mr-2" />
                   Email *
                 </label>
                 <input
                   type="email"
+                  id="email"
+                  name="email"
                   required
                   maxLength={320}
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="phone" className="block text-sm font-medium mb-2">
                   <Phone className="w-4 h-4 inline mr-2" />
-                  Phone Number *
+                  Phone (optional)
                 </label>
                 <input
                   type="tel"
-                  required
+                  id="phone"
+                  name="phone"
                   maxLength={50}
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+977 98XXXXXXXX"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
-                  <FileText className="w-4 h-4 inline mr-2" />
-                  Service Inquiry For *
-                </label>
-                <input
-                  type="text"
-                  required
-                  maxLength={200}
-                  value={form.service}
-                  onChange={(e) => setForm({ ...form, service: e.target.value })}
-                  className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="e.g. Talent, Technology, Training, Media"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
                   <MessageSquare className="w-4 h-4 inline mr-2" />
-                  Your Message
+                  Message *
                 </label>
                 <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={5}
                   maxLength={5000}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
                   className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                  rows={4}
-                  placeholder="Tell us briefly what you need help with..."
+                  placeholder="Tell us about your enquiry..."
                 />
               </div>
+
+              {/* Honeypot */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
 
               <p className="text-xs text-muted-foreground">
                 We'll reply from{" "}
-                <span className="font-medium text-foreground">
-                  careers@amigoxcel.com
-                </span>{" "}
+                <span className="font-medium text-foreground">careers@amigoxcel.com</span>{" "}
                 within 24 hours.
               </p>
 
-              <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? "Sending..." : "Book My Call"}
+              <Button type="submit" disabled={status === "loading"} className="w-full">
+                {status === "loading" ? "Sending..." : "Send Enquiry"}
               </Button>
+
+              {status === "success" && (
+                <p className="text-green-600 text-sm text-center">
+                  Thanks! Your enquiry has been sent, we'll get back to you soon.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-destructive text-sm text-center">{errorMsg}</p>
+              )}
             </form>
           </div>
         </div>
