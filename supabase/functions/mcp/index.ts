@@ -3,7 +3,7 @@
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
 // src/lib/mcp/index.ts
-import { defineMcp } from "npm:@lovable.dev/mcp-js@0.24.0";
+import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.24.0";
 
 // src/lib/mcp/tools/list-services.ts
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.24.0";
@@ -83,20 +83,24 @@ var submit_contact_default = defineTool3({
     message: z.string().trim().min(1).max(2e3).describe("What they want to discuss.")
   },
   annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
-  handler: async ({ name, email, phone, service, message }) => {
+  handler: async ({ name, email, phone, service, message }, ctx) => {
+    if (!ctx.isAuthenticated()) {
+      return { content: [{ type: "text", text: "Not authenticated." }], isError: true };
+    }
     const url = process.env.SUPABASE_URL;
     const anonKey = process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY;
     if (!url || !anonKey) {
       return { content: [{ type: "text", text: "Backend is not configured." }], isError: true };
     }
     const supabase = createClient(url, anonKey, {
+      global: { headers: { Authorization: `Bearer ${ctx.getToken()}` } },
       auth: { persistSession: false, autoRefreshToken: false }
     });
     const { error } = await supabase.from("contact_submissions").insert({
       name,
       email,
-      phone: phone ?? null,
-      service: service ?? null,
+      phone: phone ?? "",
+      service: service ?? "",
       message
     });
     if (error) {
@@ -115,11 +119,16 @@ var submit_contact_default = defineTool3({
 });
 
 // src/lib/mcp/index.ts
+var projectRef = "ysynlyafkhtkdureesqq";
 var mcp_default = defineMcp({
   name: "amigoxcel-mcp",
   title: "AmigoXcel",
   version: "0.1.0",
-  instructions: "Public tools for AmigoXcel, a growth partner across talent, technology, training, and media. Use list_services and get_company_info to describe what AmigoXcel does, and submit_contact to book a strategy call or send an enquiry.",
+  instructions: "Tools for AmigoXcel, a growth partner across talent, technology, training, and media. Sign in to use list_services and get_company_info to describe what AmigoXcel does, and submit_contact to book a strategy call or send an enquiry.",
+  auth: auth.oauth.issuer({
+    issuer: `https://${projectRef}.supabase.co/auth/v1`,
+    acceptedAudiences: "authenticated"
+  }),
   tools: [list_services_default, get_company_info_default, submit_contact_default]
 });
 
