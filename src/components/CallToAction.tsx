@@ -183,11 +183,12 @@ const CallToAction = () => {
 
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="contact-name" className="block text-sm font-medium mb-2">
                   <User className="w-4 h-4 inline mr-2" />
                   Full Name *
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   required
                   maxLength={200}
@@ -199,11 +200,12 @@ const CallToAction = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="contact-email" className="block text-sm font-medium mb-2">
                   <Mail className="w-4 h-4 inline mr-2" />
                   Email *
                 </label>
                 <input
+                  id="contact-email"
                   type="email"
                   required
                   maxLength={320}
@@ -215,11 +217,12 @@ const CallToAction = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="contact-phone" className="block text-sm font-medium mb-2">
                   <Phone className="w-4 h-4 inline mr-2" />
                   Phone Number *
                 </label>
                 <input
+                  id="contact-phone"
                   type="tel"
                   required
                   maxLength={50}
@@ -231,11 +234,12 @@ const CallToAction = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="contact-service" className="block text-sm font-medium mb-2">
                   <FileText className="w-4 h-4 inline mr-2" />
                   Service Inquiry For *
                 </label>
                 <input
+                  id="contact-service"
                   type="text"
                   required
                   maxLength={200}
@@ -247,11 +251,12 @@ const CallToAction = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="contact-message" className="block text-sm font-medium mb-2">
                   <MessageSquare className="w-4 h-4 inline mr-2" />
                   Your Message
                 </label>
                 <textarea
+                  id="contact-message"
                   maxLength={5000}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
