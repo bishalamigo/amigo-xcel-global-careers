@@ -1,0 +1,11 @@
+# AmigoXcel
+
+> AmigoXcel is a growth partner bringing together talent, technology, training and creative media so businesses can build faster, scale smarter and stand out globally.
+
+## Pages
+
+- [Home](/): Services across talent and recruitment, web and app development, training programs, and video and creative media, plus a free strategy call booking form.
+
+## Contact
+
+- Email: careers@amigoxcel.com
