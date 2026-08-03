@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amigo-xcel-global-careers.lovable.app/sitemap.xml
+Sitemap: https://www-amigoxcel-com.lovable.app/sitemap.xml
