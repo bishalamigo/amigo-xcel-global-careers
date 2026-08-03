@@ -50,34 +50,31 @@ const Hero = () => {
           </h1>
 
           <p
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light animate-fade-in"
             style={{ animationDelay: '260ms', animationFillMode: 'backwards' }}
           >
-            One partner for talent, technology, training, and creative media. We fill roles, ship products, train teams, and edit content, all under one roof.
+            We bring together talent, technology, training, and creative media so you can build faster, scale smarter, and stand out globally.
           </p>
 
           <div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-in pointer-events-auto"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 animate-fade-in pointer-events-auto"
             style={{ animationDelay: '380ms', animationFillMode: 'backwards' }}
           >
-            <Button variant="premium" size="xl" className="group shadow-glow" onClick={() => scrollTo('contact')}>
-              Book My Free Call
+            <Button variant="premium" size="xl" className="group shadow-glow" onClick={() => scrollTo('engine')}>
+              Start Your Growth
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="glass" size="xl" onClick={() => scrollTo('services')}>
-              See My Options
+            <Button variant="glass" size="xl" onClick={() => scrollTo('contact')}>
+              Book a Free Strategy Call
             </Button>
           </div>
 
-          {/* Credibility strip — sits directly under the hero */}
-          <div
-            className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-muted-foreground animate-fade-in pointer-events-auto"
+          <p
+            className="text-sm text-muted-foreground tracking-wide animate-fade-in"
             style={{ animationDelay: '500ms', animationFillMode: 'backwards' }}
           >
-            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> 50+ projects delivered</span>
-            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Clients in 8 countries</span>
-            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Reply within 24 hours</span>
-          </div>
+            Trusted by startups, creators, and growing businesses worldwide.
+          </p>
         </div>
       </div>
 

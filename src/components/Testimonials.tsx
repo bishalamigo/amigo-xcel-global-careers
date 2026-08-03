@@ -10,7 +10,7 @@ const proof = [
 
 const Testimonials = () => {
   return (
-    <section id="proof" className="py-28 bg-muted/30">
+    <section className="py-28 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20 max-w-3xl mx-auto">
           <Reveal>
@@ -40,10 +40,12 @@ const Testimonials = () => {
         <Reveal>
           <div className="max-w-3xl mx-auto">
             <Card className="bg-card border-border/60 overflow-hidden glow-border">
-              <CardContent className="p-8 md:p-12 text-center">
-                <p className="text-xl md:text-2xl font-light leading-relaxed text-foreground">
-                  Most clients come to us for one thing. They stay because their team, content, and tech finally start moving in the same direction.
-                </p>
+              <CardContent className="p-8 md:p-12">
+                
+                <blockquote className="text-xl md:text-2xl font-light leading-relaxed text-foreground">
+                  "We came in for hiring. Stayed for the engine. Within months, our team, content, and tech were finally moving in the same direction."
+                </blockquote>
+                <p className="mt-6 text-sm text-muted-foreground">Founder, growing digital brand</p>
               </CardContent>
             </Card>
           </div>

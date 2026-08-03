@@ -65,7 +65,7 @@ const Header = () => {
         <div className="hidden md:block">
           <Button asChild size="sm">
             <a href="#contact" onClick={(e) => handleNav(e, "#contact")}>
-              Book My Call
+              Book a Call
             </a>
           </Button>
         </div>
@@ -97,7 +97,7 @@ const Header = () => {
             <li>
               <Button asChild className="w-full">
                 <a href="#contact" onClick={(e) => handleNav(e, "#contact")}>
-                  Book My Call
+                  Book a Call
                 </a>
               </Button>
             </li>
