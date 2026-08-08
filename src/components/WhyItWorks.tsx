@@ -17,7 +17,7 @@ const WhyItWorks = () => {
           <Reveal>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               What Changes When
-              <span className="block gradient-text">Everything Works Together.</span>
+              <span className="block text-primary">Everything Works Together.</span>
             </h2>
           </Reveal>
         </div>
@@ -26,7 +26,7 @@ const WhyItWorks = () => {
           {shifts.map((s, i) => (
             <Reveal key={i} delay={i * 90}>
               <div
-                className="group flex items-center gap-4 md:gap-8 p-6 md:p-8 rounded-2xl bg-card/70 backdrop-blur-sm border border-border/60 hover:border-primary/50 transition-all hover-lift glow-border"
+                className="group flex items-center gap-4 md:gap-8 p-6 md:p-8 rounded-2xl bg-card/70 backdrop-blur-sm border border-border/60 hover:border-primary/50 transition-all hover-lift"
               >
                 <span className="flex-1 text-lg md:text-xl text-muted-foreground line-through decoration-destructive/40">
                   {s.from}
@@ -44,7 +44,7 @@ const WhyItWorks = () => {
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-2xl md:text-3xl font-semibold leading-snug">
               Growth stops being random.
-              <span className="block gradient-text mt-2">It becomes predictable.</span>
+              <span className="block text-primary mt-2">It becomes predictable.</span>
             </p>
           </div>
         </Reveal>

@@ -18,7 +18,7 @@ const WhoWeHelp = () => {
           <Reveal>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               Built for Those Who Are
-              <span className="block gradient-text">Ready to Scale.</span>
+              <span className="block text-primary">Ready to Scale.</span>
             </h2>
           </Reveal>
         </div>
@@ -27,10 +27,10 @@ const WhoWeHelp = () => {
           {audiences.map((a, i) => (
             <Reveal key={i} delay={i * 70}>
               <Card
-                className="group bg-card/60 backdrop-blur-sm border-border/60 hover:border-primary/50 hover-lift glow-border transition-all h-full"
+                className="group bg-card/60 backdrop-blur-sm border-border/60 hover:border-primary/50 hover-lift transition-all h-full"
               >
                 <CardContent className="p-7">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 group-hover:shadow-glow transition-all">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-all">
                     <a.icon className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{a.title}</h3>
