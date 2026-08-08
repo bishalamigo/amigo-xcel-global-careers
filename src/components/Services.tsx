@@ -49,10 +49,10 @@ const Services = () => {
           </Reveal>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-6 max-w-6xl">
+        <div className="grid lg:grid-cols-12 gap-6 max-w-6xl lg:items-start">
           {/* Featured pillar */}
           <Reveal className="lg:col-span-7">
-            <Card className="h-full bg-secondary/40 border-primary/30">
+            <Card className="bg-secondary/40 border-primary/30">
               <CardContent className="p-8 md:p-12">
                 <featured.icon className="w-10 h-10 text-primary mb-8" />
                 <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-4">{featured.tag}</p>
