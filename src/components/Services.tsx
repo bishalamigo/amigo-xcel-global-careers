@@ -37,7 +37,7 @@ const Services = () => {
           <Reveal>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
               The System Behind
-              <span className="block gradient-text">Modern Growth.</span>
+              <span className="block text-primary">Modern Growth.</span>
             </h2>
           </Reveal>
           <Reveal delay={160}>
@@ -51,12 +51,12 @@ const Services = () => {
           {pillars.map((p, i) => (
             <Reveal key={i} delay={i * 90}>
               <Card
-                className="group relative overflow-hidden border-border/60 hover:border-primary/50 bg-card/60 backdrop-blur-sm hover-lift glow-border transition-all duration-300 h-full"
+                className="group relative overflow-hidden border-border/60 hover:border-primary/50 bg-card/60 backdrop-blur-sm hover-lift transition-all duration-300 h-full"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <CardContent className="p-8 md:p-10 relative z-10">
                   <div className="flex items-start gap-5 mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 group-hover:shadow-glow transition-all duration-300">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                       <p.icon className="w-7 h-7 text-primary" />
                     </div>
                     <div>

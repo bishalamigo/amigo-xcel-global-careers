@@ -53,7 +53,7 @@ const CourseDetails = () => {
       <div className="container mx-auto px-6 relative">
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <Reveal>
-            <Badge variant="secondary" className="mb-4 glass-effect border-primary/30">
+            <Badge variant="secondary" className="mb-4 border-primary/30">
               <BookOpen className="w-3.5 h-3.5 mr-2 text-primary" />
               <span className="text-xs font-medium tracking-wide uppercase">Training Program</span>
             </Badge>
@@ -61,7 +61,7 @@ const CourseDetails = () => {
           <Reveal delay={120}>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
               Become Job Ready
-              <span className="block gradient-text">in 30 Days.</span>
+              <span className="block text-primary">in 30 Days.</span>
             </h2>
           </Reveal>
           <Reveal delay={200}>
@@ -80,7 +80,7 @@ const CourseDetails = () => {
                 onClick={() => setActiveTab(tab)}
                 className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeTab === tab
-                    ? "bg-primary text-primary-foreground shadow-glow"
+                    ? "bg-primary text-primary-foreground"
                     : "bg-card/60 text-muted-foreground hover:text-foreground border border-border/60 hover:border-primary/50"
                 }`}
                 aria-pressed={activeTab === tab}
@@ -174,11 +174,11 @@ const CourseDetails = () => {
                     Seats are limited each month. Book a free call to check your eligibility, clarify the schedule, and reserve your spot.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" className="group shadow-glow" onClick={scrollToContact}>
+                    <Button size="lg" className="group" onClick={scrollToContact}>
                       Book a Free Call
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
-                    <Button size="lg" variant="glass" onClick={scrollToContact}>
+                    <Button size="lg" variant="outline" onClick={scrollToContact}>
                       Ask a Question
                     </Button>
                   </div>

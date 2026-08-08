@@ -21,7 +21,7 @@ const Hook = () => {
             </Reveal>
             <Reveal delay={280}><p>That's where most businesses struggle.</p></Reveal>
             <Reveal delay={360}>
-              <p className="gradient-text font-semibold text-2xl md:text-3xl pt-4">
+              <p className="text-primary font-semibold text-2xl md:text-3xl pt-4">
                 That's where we step in.
               </p>
             </Reveal>

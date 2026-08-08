@@ -16,7 +16,7 @@ const Testimonials = () => {
           <Reveal>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               Built on Trust.
-              <span className="block gradient-text">Growing Every Day.</span>
+              <span className="block text-primary">Growing Every Day.</span>
             </h2>
           </Reveal>
         </div>
@@ -24,12 +24,12 @@ const Testimonials = () => {
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
           {proof.map((p, i) => (
             <Reveal key={i} delay={i * 90}>
-              <Card className="bg-card/70 backdrop-blur-sm border-border/60 hover:border-primary/40 hover-lift glow-border h-full">
+              <Card className="bg-card/70 backdrop-blur-sm border-border/60 hover:border-primary/40 hover-lift h-full">
                 <CardContent className="p-8 text-center">
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5 shadow-[0_0_30px_hsl(var(--primary)/0.25)]">
                     <p.icon className="w-7 h-7 text-primary" />
                   </div>
-                  <div className="text-3xl font-bold gradient-text mb-2">{p.stat}</div>
+                  <div className="text-3xl font-bold text-primary mb-2">{p.stat}</div>
                   <p className="text-muted-foreground">{p.label}</p>
                 </CardContent>
               </Card>
@@ -39,7 +39,7 @@ const Testimonials = () => {
 
         <Reveal>
           <div className="max-w-3xl mx-auto">
-            <Card className="bg-card border-border/60 overflow-hidden glow-border">
+            <Card className="bg-card border-border/60 overflow-hidden">
               <CardContent className="p-8 md:p-12">
                 
                 <blockquote className="text-xl md:text-2xl font-light leading-relaxed text-foreground">
