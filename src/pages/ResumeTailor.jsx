@@ -90,15 +90,21 @@ export default function App() {
     if (resumeText.trim().length < 80 || jobText.trim().length < 80) return;
     setLoading(true); setError(""); setResult(null);
     try {
-      const response = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ resumeText, jobText })
+      const { data, error: fnError } = await supabase.functions.invoke("analyze-resume", {
+        body: { resumeText, jobText }
       });
-      const data = await response.json().catch(() => null);
-      if (!response.ok) throw new Error(data?.error || "Analysis failed. Please try again.");
+      if (fnError) {
+        let message = "Analysis failed. Please try again.";
+        try {
+          const body = await fnError.context?.json?.();
+          if (body?.error) message = body.error;
+        } catch { /* ignore */ }
+        throw new Error(message);
+      }
+      if (data?.error) throw new Error(data.error);
       if (!data?.result) throw new Error("The analysis returned an invalid result.");
       setResult(data.result); setStage(2);
+
     } catch (e) {
       setError(e.message || "Something went wrong.");
     } finally { setLoading(false); }
