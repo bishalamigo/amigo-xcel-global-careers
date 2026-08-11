@@ -4,6 +4,7 @@ import {
   AlertTriangle, RotateCcw, ShieldCheck, Target
 } from "lucide-react";
 import mammoth from "mammoth";
+import { supabase } from "@/integrations/supabase/client";
 
 const STAGES = ["Sourced", "Screened", "Shortlisted"];
 const C = {
@@ -12,7 +13,7 @@ const C = {
   border: "#1B2A4A22", danger: "#B84A4A"
 };
 
-export default function App() {
+export default function ResumeTailor() {
   const [stage, setStage] = useState(0);
   const [resumeText, setResumeText] = useState("");
   const [jobText, setJobText] = useState("");
