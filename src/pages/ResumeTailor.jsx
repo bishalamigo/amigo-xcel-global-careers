@@ -138,10 +138,10 @@ export default function ResumeTailor() {
           <div><div className="fraunces" style={{fontSize:18,fontWeight:700}}>Amigo<span style={{color:C.teal}}>Xcel</span></div><div style={{fontSize:11,letterSpacing:".06em",textTransform:"uppercase",color:C.muted}}>Resume Tailor</div></div>
         </div>
         <div style={{display:"flex",gap:6,fontSize:12,alignItems:"center"}}>
-          {STAGES.map((s,i)=><React.Fragment key={s}>
+          {STAGES.map((s,i)=><span key={s} style={{display:"contents"}}>
             <span style={{padding:"6px 12px",borderRadius:999,background:i===stage?C.navy:i<stage?`${C.teal}20`:"transparent",color:i===stage?C.cream:i<stage?C.teal:"#1B2A4A66",border:i===stage?"none":`1px solid ${C.border}`,fontWeight:600}}>{s}</span>
             {i<2&&<ChevronRight size={14} color="#1B2A4A44"/>}
-          </React.Fragment>)}
+          </span>)}
         </div>
       </header>
 

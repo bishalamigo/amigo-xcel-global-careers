@@ -136,6 +136,10 @@ async function anthropic(prompt: string) {
     const data = await r.json().catch(() => null);
     if (!r.ok) {
       console.error("Anthropic error:", JSON.stringify(data));
+      const detail = String(data?.error?.message || "");
+      if (/credit balance/i.test(detail)) {
+        throw new PubError(402, "The AI account is out of credits. Please top up the Anthropic account to run analyses.");
+      }
       if (r.status === 401) throw new PubError(500, "AI service configuration is invalid.");
       if (r.status === 429) throw new PubError(429, "AI service is temporarily busy. Try again shortly.");
       throw new PubError(502, "AI analysis service returned an error.");
