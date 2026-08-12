@@ -96,14 +96,23 @@ const Header = () => {
           </Button>
         </div>
 
-        <button
-          className="md:hidden p-2"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <Link
+            to="/resume-tailor"
+            className="text-xs font-semibold px-3 py-1.5 rounded-full border border-primary/40 text-primary"
+            onClick={() => setOpen(false)}
+          >
+            Resume Tailor
+          </Link>
+          <button
+            className="p-2"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </nav>
 
       {open && (
