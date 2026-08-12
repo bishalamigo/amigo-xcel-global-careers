@@ -1,6 +1,9 @@
-// Resume Tailor analysis endpoint. ANTHROPIC_API_KEY stays server-side.
-const API_KEY = Deno.env.get("ANTHROPIC_API_KEY");
-const MODEL = Deno.env.get("ANTHROPIC_MODEL") || "claude-sonnet-4-5-20250929";
+// Resume Tailor analysis endpoint. The AI key stays server-side.
+import { streamText } from "npm:ai";
+import { createOpenAICompatible } from "npm:@ai-sdk/openai-compatible";
+
+const API_KEY = Deno.env.get("LOVABLE_API_KEY");
+const MODEL = "google/gemini-3.6-flash";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
