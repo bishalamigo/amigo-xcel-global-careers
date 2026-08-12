@@ -115,48 +115,37 @@ ${job}
 <<<JOB_END>>>`;
 }
 
-async function anthropic(prompt: string) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 60000);
+async function runModel(prompt: string): Promise<string> {
+  const gateway = createOpenAICompatible({
+    name: "lovable",
+    baseURL: "https://ai.gateway.lovable.dev/v1",
+    headers: { "Lovable-API-Key": API_KEY! },
+  });
+
   try {
-    const r = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      signal: controller.signal,
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": API_KEY!,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 3000,
-        temperature: 0,
-        system:
-          "You are a factual resume screening engine. Never invent candidate information.",
-        messages: [{ role: "user", content: prompt }],
-      }),
+    const result = streamText({
+      model: gateway(MODEL),
+      temperature: 0,
+      system:
+        "You are a factual resume screening engine. Never invent candidate information. Reply with JSON only.",
+      prompt,
     });
-    const data = await r.json().catch(() => null);
-    if (!r.ok) {
-      console.error("Anthropic error:", JSON.stringify(data));
-      const detail = String(data?.error?.message || "");
-      if (/credit balance/i.test(detail)) {
-        throw new PubError(402, "The AI account is out of credits. Please top up the Anthropic account to run analyses.");
-      }
-      if (r.status === 401) throw new PubError(500, "AI service configuration is invalid.");
-      if (r.status === 429) throw new PubError(429, "AI service is temporarily busy. Try again shortly.");
-      throw new PubError(502, "AI analysis service returned an error.");
-    }
-    return data;
+    return (await result.text).trim();
   } catch (e) {
-    if ((e as Error).name === "AbortError") {
-      throw new PubError(504, "Analysis timed out. Please try again.");
+    // deno-lint-ignore no-explicit-any
+    const err = e as any;
+    const status = Number(err?.statusCode ?? err?.status ?? 0);
+    console.error("AI gateway error:", status, String(err?.message || err));
+    if (status === 429) {
+      throw new PubError(429, "AI service is busy right now. Please try again shortly.");
     }
-    throw e;
-  } finally {
-    clearTimeout(timer);
+    if (status === 402) {
+      throw new PubError(402, "AI credits are exhausted. Please add credits to continue.");
+    }
+    throw new PubError(502, "AI analysis service returned an error.");
   }
 }
+
 
 // deno-lint-ignore no-explicit-any
 function parseJson(text: string): any {
