@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Why It Works", href: "#why" },
   { label: "Who We Help", href: "#audience" },
   { label: "Proof", href: "#proof" },
+  { label: "Resume Tailor", href: "/resume-tailor", isRoute: true },
   { label: "Contact", href: "#contact" },
 ];
 
