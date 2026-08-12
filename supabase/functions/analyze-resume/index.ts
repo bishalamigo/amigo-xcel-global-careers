@@ -227,14 +227,7 @@ Deno.serve(async (req) => {
     if (resume.length > 30000) throw new PubError(413, "Resume is too large. Please provide a concise text version.");
     if (job.length > 20000) throw new PubError(413, "Job description is too large.");
 
-    const response = await anthropic(buildPrompt(resume, job));
-    const text = (response?.content || [])
-      // deno-lint-ignore no-explicit-any
-      .filter((x: any) => x.type === "text")
-      // deno-lint-ignore no-explicit-any
-      .map((x: any) => x.text)
-      .join("\n")
-      .trim();
+    const text = await runModel(buildPrompt(resume, job));
 
     if (!text) throw new PubError(502, "The AI returned an empty analysis.");
 
