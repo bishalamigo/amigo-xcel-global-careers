@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Upload, CheckCircle2, Sparkles, Loader2, ChevronRight,
-  AlertTriangle, RotateCcw, ShieldCheck, Target
+  AlertTriangle, RotateCcw, ShieldCheck, Target, FileText, FileType, Printer, Wand2
 } from "lucide-react";
 import mammoth from "mammoth";
 import { supabase } from "@/integrations/supabase/client";
+import { toPlainText, downloadTxt, downloadDoc, downloadPdf } from "@/lib/tailoredResume";
+
 
 const STAGES = ["Sourced", "Screened", "Shortlisted"];
 const C = {
@@ -22,7 +24,11 @@ export default function ResumeTailor() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
+  const [tailored, setTailored] = useState(null);
+  const [building, setBuilding] = useState(false);
+  const [buildError, setBuildError] = useState("");
   const fileInputRef = useRef(null);
+
 
   useEffect(() => { loadPdfReader(); }, []);
 
@@ -104,18 +110,41 @@ export default function ResumeTailor() {
       }
       if (data?.error) throw new Error(data.error);
       if (!data?.result) throw new Error("The analysis returned an invalid result.");
-      setResult(data.result); setStage(2);
+      setResult(data.result); setTailored(null); setBuildError(""); setStage(2);
 
     } catch (e) {
       setError(e.message || "Something went wrong.");
     } finally { setLoading(false); }
   }
 
+  async function buildTailoredResume() {
+    setBuilding(true); setBuildError("");
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke("tailor-resume", {
+        body: { resumeText, jobText }
+      });
+      if (fnError) {
+        let message = "Could not build the tailored resume. Please try again.";
+        try {
+          const body = await fnError.context?.json?.();
+          if (body?.error) message = body.error;
+        } catch { /* ignore */ }
+        throw new Error(message);
+      }
+      if (data?.error) throw new Error(data.error);
+      if (!data?.resume) throw new Error("The builder returned an invalid resume.");
+      setTailored(data.resume);
+    } catch (e) {
+      setBuildError(e.message || "Something went wrong.");
+    } finally { setBuilding(false); }
+  }
+
   function reset() {
     setStage(0); setResumeText(""); setJobText(""); setFileName("");
-    setResult(null); setError("");
+    setResult(null); setError(""); setTailored(null); setBuildError("");
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
+
 
   const canResume = resumeText.trim().length >= 80;
   const canAnalyze = canResume && jobText.trim().length >= 80 && !loading;
@@ -148,7 +177,7 @@ export default function ResumeTailor() {
       <main className="main" style={{maxWidth:820,margin:"0 auto",padding:"45px 20px 80px"}}>
         {stage===0&&<ResumeStage {...{resumeText,setResumeText,fileName,parsing,error,fileInputRef,handleFile,canResume}} onContinue={()=>{setError("");setStage(1)}}/>}
         {stage===1&&<JobStage {...{jobText,setJobText,error,loading,canAnalyze}} onBack={()=>{setError("");setStage(0)}} onAnalyze={analyze}/>}
-        {stage===2&&result&&<Results result={result} onTryAnother={()=>{setResult(null);setError("");setStage(1)}} onReset={reset}/>}
+        {stage===2&&result&&<Results result={result} tailored={tailored} building={building} buildError={buildError} onBuild={buildTailoredResume} onTryAnother={()=>{setResult(null);setTailored(null);setError("");setBuildError("");setStage(1)}} onReset={reset}/>}
       </main>
 
       <footer style={{textAlign:"center",fontSize:12,color:"#1B2A4A66",padding:"0 20px 30px"}}>
@@ -194,9 +223,11 @@ function JobStage({jobText,setJobText,error,loading,canAnalyze,onBack,onAnalyze}
   </section>
 }
 
-function Results({result,onTryAnother,onReset}) {
+function Results({result,tailored,building,buildError,onBuild,onTryAnother,onReset}) {
   const score=Math.max(0,Math.min(100,Number(result.matchScore||0)));
   return <section>
+    <TailoredResume tailored={tailored} building={building} buildError={buildError} onBuild={onBuild}/>
+
     <div style={{display:"flex",alignItems:"center",gap:20,marginBottom:30,flexWrap:"wrap"}}>
       <Gauge score={score}/>
       <div><div style={{fontSize:12,letterSpacing:".06em",textTransform:"uppercase",color:C.muted,fontWeight:700}}>Match verdict</div>
@@ -217,6 +248,100 @@ function Results({result,onTryAnother,onReset}) {
     <div style={{display:"flex",gap:10,marginTop:32}}><button className="btn" onClick={onTryAnother} style={secondary}>Try another role</button><button className="btn" onClick={onReset} style={{...primary(C.navy),flex:1}}><RotateCcw size={16}/>Start over</button></div>
   </section>
 }
+
+function TailoredResume({tailored,building,buildError,onBuild}) {
+  const [copied,setCopied]=useState(false);
+  async function copy(){
+    try{ await navigator.clipboard.writeText(toPlainText(tailored)); setCopied(true); setTimeout(()=>setCopied(false),2000); }catch{ /* ignore */ }
+  }
+
+  if(!tailored) return <div style={{border:`1px solid ${C.border}`,background:C.paper,borderRadius:16,padding:22,marginBottom:30}}>
+    <div className="fraunces" style={{fontSize:22,fontWeight:600,marginBottom:6}}>Build your tailored resume</div>
+    <p style={{color:C.muted,fontSize:14,lineHeight:1.6,margin:"0 0 16px"}}>We rewrite your full resume to match this job, using only the facts already in your resume. Download it free as PDF, Word or plain text.</p>
+    {buildError&&<ErrorBox message={buildError}/>}
+    <button className="btn" disabled={building} onClick={onBuild} style={{...primary(C.teal),width:"100%",marginTop:4}}>
+      {building?<><Loader2 size={18} className="spin"/>Writing your tailored resume...</>:<><Wand2 size={17}/>Build my tailored resume</>}
+    </button>
+  </div>;
+
+  const r=tailored;
+  const contact=[r.contact?.email,r.contact?.phone,r.contact?.location,...(r.contact?.links||[])].filter(Boolean).join("  |  ");
+
+  return <div style={{border:`1px solid ${C.border}`,background:C.paper,borderRadius:16,padding:22,marginBottom:34}}>
+    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:12,flexWrap:"wrap",marginBottom:14}}>
+      <div className="fraunces" style={{fontSize:22,fontWeight:600}}>Your tailored resume</div>
+      <button className="btn" onClick={onBuild} disabled={building} style={{...secondary,padding:"9px 14px",fontSize:13}}>{building?<><Loader2 size={15} className="spin"/>Rebuilding</>:<><RotateCcw size={14}/>Regenerate</>}</button>
+    </div>
+    {buildError&&<ErrorBox message={buildError}/>}
+
+    <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:18}}>
+      <button className="btn" onClick={()=>downloadPdf(r)} style={{...primary(C.navy),padding:"11px 15px",fontSize:13}}><Printer size={15}/>Download PDF</button>
+      <button className="btn" onClick={()=>downloadDoc(r)} style={{...primary(C.teal),padding:"11px 15px",fontSize:13}}><FileType size={15}/>Download Word</button>
+      <button className="btn" onClick={()=>downloadTxt(r)} style={{...secondary,padding:"11px 15px",fontSize:13}}><FileText size={15}/>Download text</button>
+      <button className="btn" onClick={copy} style={{...secondary,padding:"11px 15px",fontSize:13}}>{copied?<><CheckCircle2 size={15} color={C.teal}/>Copied</>:"Copy all"}</button>
+    </div>
+    <div style={{fontSize:11.5,color:C.muted,marginBottom:16}}>PDF opens your browser's print dialog, choose "Save as PDF". Word downloads a .doc file that opens in Word, Google Docs or Pages.</div>
+
+    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:"26px 24px",fontSize:13.5,lineHeight:1.6}}>
+      {r.name&&<div className="fraunces" style={{fontSize:24,fontWeight:700}}>{r.name}</div>}
+      {r.headline&&<div style={{fontWeight:600,marginTop:2}}>{r.headline}</div>}
+      {contact&&<div style={{color:C.muted,fontSize:12.5,marginTop:4}}>{contact}</div>}
+
+      <ResumeBlock title="Professional summary">{r.summary}</ResumeBlock>
+      {!!r.coreSkills?.length&&<ResumeBlock title="Core skills">{r.coreSkills.join(" · ")}</ResumeBlock>}
+
+      {!!r.experience?.length&&<ResumeBlock title="Professional experience">
+        {r.experience.map((e,i)=><div key={i} style={{marginBottom:14}}>
+          <div style={{fontWeight:700}}>{[e.title,e.company].filter(Boolean).join(" — ")}</div>
+          <div style={{color:C.muted,fontSize:12.5}}>{[e.location,e.dates].filter(Boolean).join(" | ")}</div>
+          <ul style={{margin:"6px 0 0 18px",padding:0}}>{(e.bullets||[]).map((b,j)=><li key={j} style={{marginBottom:4}}>{b}</li>)}</ul>
+        </div>)}
+      </ResumeBlock>}
+
+      {!!r.projects?.length&&<ResumeBlock title="Projects">
+        {r.projects.map((p,i)=><div key={i} style={{marginBottom:12}}>
+          <div style={{fontWeight:700}}>{p.name}</div>
+          {p.description&&<div>{p.description}</div>}
+          <ul style={{margin:"6px 0 0 18px",padding:0}}>{(p.bullets||[]).map((b,j)=><li key={j} style={{marginBottom:4}}>{b}</li>)}</ul>
+        </div>)}
+      </ResumeBlock>}
+
+      {!!r.education?.length&&<ResumeBlock title="Education">
+        {r.education.map((e,i)=><div key={i} style={{marginBottom:10}}>
+          <div style={{fontWeight:700}}>{[e.degree,e.institution].filter(Boolean).join(" — ")}</div>
+          <div style={{color:C.muted,fontSize:12.5}}>{[e.dates,e.details].filter(Boolean).join(" | ")}</div>
+        </div>)}
+      </ResumeBlock>}
+
+      {!!r.certifications?.length&&<ResumeBlock title="Certifications">
+        <ul style={{margin:"0 0 0 18px",padding:0}}>{r.certifications.map((c,i)=><li key={i} style={{marginBottom:4}}>{c}</li>)}</ul>
+      </ResumeBlock>}
+
+      {!!r.additional?.length&&<ResumeBlock title="Additional">
+        <ul style={{margin:"0 0 0 18px",padding:0}}>{r.additional.map((c,i)=><li key={i} style={{marginBottom:4}}>{c}</li>)}</ul>
+      </ResumeBlock>}
+    </div>
+
+    {!!r.changeNotes?.length&&<div style={{marginTop:16}}>
+      <div style={{fontSize:12,letterSpacing:".06em",textTransform:"uppercase",color:C.muted,fontWeight:700,marginBottom:8}}>What we changed</div>
+      {r.changeNotes.map((x,i)=><Row key={i} icon={<ChevronRight size={15}/>} text={x}/>)}
+    </div>}
+
+    {!!r.notAdded?.length&&<div style={{display:"flex",gap:10,background:"#C7623F10",border:"1px solid #C7623F25",borderRadius:12,padding:15,fontSize:13,lineHeight:1.5,marginTop:16}}>
+      <AlertTriangle size={18} color={C.coral}/>
+      <div><strong>Not claimed on your resume:</strong> {r.notAdded.join("; ")}. We never add skills you have not evidenced. Close these gaps and rebuild.</div>
+    </div>}
+  </div>
+}
+
+function ResumeBlock({title,children}) {
+  if(!children) return null;
+  return <div style={{marginTop:18}}>
+    <div style={{fontSize:11.5,letterSpacing:".08em",textTransform:"uppercase",fontWeight:700,borderBottom:`1px solid ${C.border}`,paddingBottom:4,marginBottom:8}}>{title}</div>
+    <div>{children}</div>
+  </div>
+}
+
 
 function Gauge({score}) {
   const r=34,circ=2*Math.PI*r,offset=circ-(score/100)*circ;
