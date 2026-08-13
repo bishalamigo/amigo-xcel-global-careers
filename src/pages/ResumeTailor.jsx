@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Upload, CheckCircle2, Sparkles, Loader2, ChevronRight,
-  AlertTriangle, RotateCcw, ShieldCheck, Target
+  AlertTriangle, RotateCcw, ShieldCheck, Target, FileText, FileType, Printer, Wand2
 } from "lucide-react";
 import mammoth from "mammoth";
 import { supabase } from "@/integrations/supabase/client";
+import { toPlainText, downloadTxt, downloadDoc, downloadPdf } from "@/lib/tailoredResume";
+
 
 const STAGES = ["Sourced", "Screened", "Shortlisted"];
 const C = {
