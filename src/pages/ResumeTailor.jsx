@@ -24,7 +24,11 @@ export default function ResumeTailor() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
+  const [tailored, setTailored] = useState(null);
+  const [building, setBuilding] = useState(false);
+  const [buildError, setBuildError] = useState("");
   const fileInputRef = useRef(null);
+
 
   useEffect(() => { loadPdfReader(); }, []);
 
