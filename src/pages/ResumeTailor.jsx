@@ -110,18 +110,41 @@ export default function ResumeTailor() {
       }
       if (data?.error) throw new Error(data.error);
       if (!data?.result) throw new Error("The analysis returned an invalid result.");
-      setResult(data.result); setStage(2);
+      setResult(data.result); setTailored(null); setBuildError(""); setStage(2);
 
     } catch (e) {
       setError(e.message || "Something went wrong.");
     } finally { setLoading(false); }
   }
 
+  async function buildTailoredResume() {
+    setBuilding(true); setBuildError("");
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke("tailor-resume", {
+        body: { resumeText, jobText }
+      });
+      if (fnError) {
+        let message = "Could not build the tailored resume. Please try again.";
+        try {
+          const body = await fnError.context?.json?.();
+          if (body?.error) message = body.error;
+        } catch { /* ignore */ }
+        throw new Error(message);
+      }
+      if (data?.error) throw new Error(data.error);
+      if (!data?.resume) throw new Error("The builder returned an invalid resume.");
+      setTailored(data.resume);
+    } catch (e) {
+      setBuildError(e.message || "Something went wrong.");
+    } finally { setBuilding(false); }
+  }
+
   function reset() {
     setStage(0); setResumeText(""); setJobText(""); setFileName("");
-    setResult(null); setError("");
+    setResult(null); setError(""); setTailored(null); setBuildError("");
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
+
 
   const canResume = resumeText.trim().length >= 80;
   const canAnalyze = canResume && jobText.trim().length >= 80 && !loading;
