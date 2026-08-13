@@ -177,7 +177,7 @@ export default function ResumeTailor() {
       <main className="main" style={{maxWidth:820,margin:"0 auto",padding:"45px 20px 80px"}}>
         {stage===0&&<ResumeStage {...{resumeText,setResumeText,fileName,parsing,error,fileInputRef,handleFile,canResume}} onContinue={()=>{setError("");setStage(1)}}/>}
         {stage===1&&<JobStage {...{jobText,setJobText,error,loading,canAnalyze}} onBack={()=>{setError("");setStage(0)}} onAnalyze={analyze}/>}
-        {stage===2&&result&&<Results result={result} onTryAnother={()=>{setResult(null);setError("");setStage(1)}} onReset={reset}/>}
+        {stage===2&&result&&<Results result={result} tailored={tailored} building={building} buildError={buildError} onBuild={buildTailoredResume} onTryAnother={()=>{setResult(null);setTailored(null);setError("");setBuildError("");setStage(1)}} onReset={reset}/>}
       </main>
 
       <footer style={{textAlign:"center",fontSize:12,color:"#1B2A4A66",padding:"0 20px 30px"}}>
