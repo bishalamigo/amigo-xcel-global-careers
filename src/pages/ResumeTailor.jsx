@@ -223,9 +223,11 @@ function JobStage({jobText,setJobText,error,loading,canAnalyze,onBack,onAnalyze}
   </section>
 }
 
-function Results({result,onTryAnother,onReset}) {
+function Results({result,tailored,building,buildError,onBuild,onTryAnother,onReset}) {
   const score=Math.max(0,Math.min(100,Number(result.matchScore||0)));
   return <section>
+    <TailoredResume tailored={tailored} building={building} buildError={buildError} onBuild={onBuild}/>
+
     <div style={{display:"flex",alignItems:"center",gap:20,marginBottom:30,flexWrap:"wrap"}}>
       <Gauge score={score}/>
       <div><div style={{fontSize:12,letterSpacing:".06em",textTransform:"uppercase",color:C.muted,fontWeight:700}}>Match verdict</div>
