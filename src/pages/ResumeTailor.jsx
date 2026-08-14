@@ -234,8 +234,17 @@ function Results({result,tailored,building,buildError,onBuild,onTryAnother,onRes
       <div className="fraunces" style={{fontSize:27,fontWeight:600,marginTop:3}}>{result.verdict}</div>
       <div style={{marginTop:8,display:"inline-flex",alignItems:"center",gap:6,background:`${C.teal}15`,color:C.teal,padding:"6px 10px",borderRadius:999,fontSize:12,fontWeight:700}}><CheckCircle2 size={14}/>{result.recommendation}</div></div>
     </div>
+    {result.scoreCeiling?.applied&&<div style={{display:"flex",gap:10,background:"#B84A4A10",border:"1px solid #B84A4A30",borderRadius:12,padding:15,fontSize:13,lineHeight:1.5,marginBottom:24}}><AlertTriangle size={18} color={C.danger}/><div><strong>Score capped at {result.scoreCeiling.cap}%.</strong> {result.scoreCeiling.reason}</div></div>}
+    <MustHaveGaps summary={result.mustHaveSummary} items={result.unmetMustHaves}/>
     <Section title="Score breakdown"><ScoreBreakdown breakdown={result.scoreBreakdown}/></Section>
     <Section title="Role requirements"><Requirements items={result.requirements}/></Section>
+    {!!result.gapsToAddress?.length&&<Section title="Gaps to address separately">
+      <div style={{...card,borderColor:"#C7623F40"}}>
+        <div style={{marginBottom:10,color:C.muted,fontSize:13}}>We will not reword around these. They need real action or an honest conversation.</div>
+        {result.gapsToAddress.map((x,i)=><Row key={i} icon={<AlertTriangle size={15} color={C.coral}/>} text={x}/>)}
+      </div>
+    </Section>}
+
     <Section title="Already working in your favor">{(result.strengths||[]).map((x,i)=><Row key={i} icon={<CheckCircle2 size={16} color={C.teal}/>} text={x}/>)}</Section>
     <div style={{display:"flex",gap:20,flexWrap:"wrap"}}>
       <div style={{flex:1,minWidth:260}}><Section title="Keywords already supported"><Tags tags={result.matchedKeywords} color={C.teal} bg={`${C.teal}15`}/></Section></div>
