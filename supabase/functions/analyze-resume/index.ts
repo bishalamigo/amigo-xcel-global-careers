@@ -42,67 +42,66 @@ const clean = (v: unknown) =>
 function buildPrompt(resume: string, job: string) {
   return `You are an expert technical recruiter and resume screening specialist for Amigoxcel.
 
-Compare the supplied resume against the supplied job description.
+Compare the supplied resume against the supplied job description using SEMANTIC matching, not literal keyword matching.
+
+STEP 1 - REQUIREMENT EXTRACTION
+Extract the real requirements from the job description and label each one:
+- priority "must": explicitly required (words like required, must have, essential, minimum, X+ years of, or clearly core to the role).
+- priority "preferred": nice to have, bonus, desirable, plus, advantageous.
+Extract 6-14 requirements. Do not invent requirements the job description does not state.
+
+STEP 2 - SEMANTIC MATCHING (this is the important part)
+For each requirement decide how the resume covers it. Judge MEANING, not wording.
+Match types:
+- "direct": the resume evidences the same skill, tool or responsibility, even if worded differently.
+  Examples of direct equivalence: "candidate screening" = "shortlisting" = "CV filtering"; "stakeholder management" = "client relationship management"; "React.js" = "React".
+- "semantic": the resume evidences a closely related activity that covers most of the requirement but not all of it.
+  Example: "email outreach coordination" partially covers "candidate communication".
+  Do NOT mark a distinct technical skill as semantic just because it lives in the same domain: "LinkedIn sourcing" is NOT "Boolean search"; "Excel" is NOT "SQL".
+- "transferable": the resume shows real depth in an adjacent skill and the specific requirement is a learnable gap.
+  Example: 5 years of LinkedIn Recruiter sourcing when the job asks for Naukri, or Workday ATS when the job asks for Greenhouse. Adjacent tool in the SAME category with demonstrated depth = transferable, not absent, and not a full match.
+- "absent": no evidence and nothing genuinely adjacent. Being able to learn something quickly is not evidence.
+
+Set "coverage" to exactly: 1 for direct, 0.7 for semantic, 0.45 for transferable, 0 for absent.
+Set "status": confirmed (direct), partial (semantic or transferable), missing (absent).
+"evidence": quote or paraphrase the specific resume proof. For absent, say what is missing.
+"gapNote": for semantic, transferable and absent only, one short line on what would close the gap. "" otherwise.
 
 FACTUAL SAFETY RULES:
 - Never invent skills, employers, titles, dates, education, certifications, achievements, metrics, responsibilities or technologies.
-- Never claim a job-description skill merely because the job asks for it.
-- Only state that a skill is confirmed when the resume provides evidence.
-- If evidence is ambiguous, mark it partial.
-- Missing means "not established by the supplied resume", not necessarily "candidate cannot do it".
-- Rewritten bullets must preserve the factual meaning of the source resume.
-- Improve wording and relevance, but never fabricate.
-- Every rewritten statement must be defensible by the candidate in an interview.
+- Never credit a job-description skill merely because the job asks for it.
+- Missing means "not established by the supplied resume".
+- Rewritten bullets must preserve the factual meaning of the source resume and be defensible in an interview.
+- If a rewrite would require the candidate to overstate, do not write it. List it under "gapsToAddress" instead.
 
-SCORING:
-Technical skills 35
-Relevant experience 25
-Qualifications 20
-Responsibilities 10
-Keywords 10
-Total 100.
-
-Status values: confirmed, partial, missing.
-
-Verdicts:
-90-100 Excellent match
-75-89 Strong match
-60-74 Moderate match
-40-59 Needs significant improvement
-0-39 Weak match
-
-Recommendations:
-90-100 Strongly shortlist
-75-89 Shortlist
-60-74 Consider after targeted edits
-40-59 Do not shortlist yet
-0-39 Weak fit
+STEP 3 - SUPPORTING JUDGEMENTS (0 to 10 each, integers)
+- experienceDepth: seniority, years and scope versus what the job asks for.
+- responsibilities: overlap between day to day duties in the resume and in the job.
+- keywordAlignment: how well the resume already speaks the job's language (ATS wording), semantic equivalents count.
 
 Return ONLY valid JSON matching this exact shape:
 {
-  "matchScore": 0,
-  "verdict": "",
-  "recommendation": "",
-  "scoreBreakdown": { "skills": 0, "experience": 0, "qualifications": 0, "responsibilities": 0, "keywords": 0 },
-  "requirements": [ { "requirement": "", "status": "confirmed", "evidence": "" } ],
+  "requirements": [ { "requirement": "", "priority": "must", "matchType": "direct", "coverage": 1, "status": "confirmed", "evidence": "", "gapNote": "" } ],
+  "experienceDepth": 0,
+  "responsibilities": 0,
+  "keywordAlignment": 0,
   "matchedKeywords": [],
   "missingKeywords": [],
   "strengths": [],
   "fixes": [],
   "rewrittenSummary": "",
   "rewrittenBullets": [],
+  "gapsToAddress": [],
   "caution": ""
 }
 
 Rules:
-- requirements: max 12 important requirements
-- matchedKeywords: max 10
-- missingKeywords: max 10
-- strengths: exactly 3
-- fixes: max 6
-- rewrittenBullets: 3-5
-- Keep evidence specific.
-- Keep everything concise.
+- requirements: 6-14 items, most important first.
+- matchedKeywords / missingKeywords: max 10 each. missingKeywords must only contain terms the resume genuinely does not support.
+- strengths: exactly 3. fixes: max 6, each an honest wording, structure or evidence fix.
+- rewrittenBullets: 3-5, factual.
+- gapsToAddress: real unmet must-have requirements the candidate should address separately (training, certification, honest framing). Never hide them.
+- Keep everything concise. No markdown, JSON only.
 
 RESUME:
 <<<RESUME_START>>>
@@ -127,7 +126,7 @@ async function runModel(prompt: string): Promise<string> {
       model: gateway(MODEL),
       temperature: 0,
       system:
-        "You are a factual resume screening engine. Never invent candidate information. Reply with JSON only.",
+        "You are a factual resume screening engine that matches on meaning, not literal keywords. Never invent candidate information. Reply with JSON only.",
       prompt,
     });
     return (await result.text).trim();
@@ -176,36 +175,137 @@ const verdictFor = (s: number) =>
 const recommendationFor = (s: number) =>
   s >= 90 ? "Strongly shortlist" : s >= 75 ? "Shortlist" : s >= 60 ? "Consider after targeted edits" : s >= 40 ? "Do not shortlist yet" : "Weak fit";
 
+// Weights: must-have coverage dominates, preferred is a bonus layer.
+const W_MUST = 55;
+const W_PREF = 15;
+const W_DEPTH = 15;
+const W_RESP = 8;
+const W_KEYS = 7;
+
+const COVERAGE: Record<string, number> = { direct: 1, semantic: 0.7, transferable: 0.45, absent: 0 };
+
+// deno-lint-ignore no-explicit-any
+function normalizeRequirements(x: any) {
+  const list = Array.isArray(x?.requirements) ? x.requirements.slice(0, 14) : [];
+  // deno-lint-ignore no-explicit-any
+  return list.map((r: any) => {
+    const priority = r?.priority === "preferred" ? "preferred" : "must";
+    const matchType = ["direct", "semantic", "transferable", "absent"].includes(r?.matchType)
+      ? r.matchType
+      : r?.status === "confirmed"
+      ? "direct"
+      : r?.status === "partial"
+      ? "semantic"
+      : "absent";
+    const coverage = COVERAGE[matchType];
+    return {
+      requirement: String(r?.requirement || "Unspecified requirement"),
+      priority,
+      matchType,
+      coverage,
+      status: matchType === "direct" ? "confirmed" : matchType === "absent" ? "missing" : "partial",
+      evidence: String(r?.evidence || "No supporting evidence found in the supplied resume."),
+      gapNote: matchType === "direct" ? "" : String(r?.gapNote || ""),
+    };
+  });
+}
+
 // deno-lint-ignore no-explicit-any
 function normalize(x: any) {
-  const b = {
-    skills: clampNum(x?.scoreBreakdown?.skills, 35),
-    experience: clampNum(x?.scoreBreakdown?.experience, 25),
-    qualifications: clampNum(x?.scoreBreakdown?.qualifications, 20),
-    responsibilities: clampNum(x?.scoreBreakdown?.responsibilities, 10),
-    keywords: clampNum(x?.scoreBreakdown?.keywords, 10),
-  };
-  const score = b.skills + b.experience + b.qualifications + b.responsibilities + b.keywords;
+  const requirements = normalizeRequirements(x);
+  const musts = requirements.filter((r) => r.priority === "must");
+  const prefs = requirements.filter((r) => r.priority === "preferred");
+
+  const avg = (list: typeof requirements) =>
+    list.length ? list.reduce((s, r) => s + r.coverage, 0) / list.length : 0;
+
+  // When the job lists no preferred items, its weight rolls into must-haves.
+  const mustWeight = prefs.length ? W_MUST : W_MUST + W_PREF;
+  const mustPoints = Math.round(avg(musts) * mustWeight);
+  const prefPoints = prefs.length ? Math.round(avg(prefs) * W_PREF) : 0;
+
+  const depth = clampNum(x?.experienceDepth, 10);
+  const resp = clampNum(x?.responsibilities, 10);
+  const keys = clampNum(x?.keywordAlignment, 10);
+
+  const depthPoints = Math.round((depth / 10) * W_DEPTH);
+  const respPoints = Math.round((resp / 10) * W_RESP);
+  const keyPoints = Math.round((keys / 10) * W_KEYS);
+
+  let score = Math.max(0, Math.min(100, mustPoints + prefPoints + depthPoints + respPoints + keyPoints));
+
+  const unmetMustHaves = musts.filter((r) => r.matchType === "absent");
+  const partialMustHaves = musts.filter((r) => r.matchType !== "absent" && r.matchType !== "direct");
+
+  // Score ceiling: more than 2 completely absent must-haves caps the score.
+  let ceiling: { applied: boolean; cap: number; reason: string } = { applied: false, cap: 100, reason: "" };
+  if (unmetMustHaves.length > 2) {
+    const cap = 84;
+    if (score > cap) {
+      ceiling = {
+        applied: true,
+        cap,
+        reason: `${unmetMustHaves.length} must-have requirements are completely absent from the resume (${unmetMustHaves
+          .map((r) => r.requirement)
+          .slice(0, 4)
+          .join(", ")}). No amount of rewording can lift the score above ${cap}% until these are genuinely met.`,
+      };
+      score = cap;
+    } else {
+      ceiling = {
+        applied: false,
+        cap,
+        reason: `${unmetMustHaves.length} must-have requirements are completely absent, so this role is capped at ${cap}% until they are genuinely met.`,
+      };
+    }
+  }
+
+  const gapsToAddress = arr(x?.gapsToAddress, 8);
+  const mustGapLines = unmetMustHaves.map((r) =>
+    r.gapNote ? `${r.requirement}: ${r.gapNote}` : r.requirement
+  );
+  const mergedGaps = Array.from(new Set([...mustGapLines, ...gapsToAddress])).slice(0, 10);
+
   return {
     matchScore: score,
-    verdict: x?.verdict || verdictFor(score),
-    recommendation: x?.recommendation || recommendationFor(score),
-    scoreBreakdown: b,
-    requirements: Array.isArray(x?.requirements)
-      // deno-lint-ignore no-explicit-any
-      ? x.requirements.slice(0, 12).map((r: any) => ({
-        requirement: String(r?.requirement || "Unspecified requirement"),
-        status: ["confirmed", "partial", "missing"].includes(r?.status) ? r.status : "missing",
-        evidence: String(r?.evidence || "No supporting evidence found in the supplied resume."),
-      }))
-      : [],
+    verdict: verdictFor(score),
+    recommendation: recommendationFor(score),
+    scoreBreakdown: {
+      mustHaves: mustPoints,
+      mustHavesMax: mustWeight,
+      preferred: prefPoints,
+      preferredMax: prefs.length ? W_PREF : 0,
+      experience: depthPoints,
+      experienceMax: W_DEPTH,
+      responsibilities: respPoints,
+      responsibilitiesMax: W_RESP,
+      keywords: keyPoints,
+      keywordsMax: W_KEYS,
+    },
+    requirements,
+    mustHaveSummary: {
+      total: musts.length,
+      met: musts.filter((r) => r.matchType === "direct").length,
+      partial: partialMustHaves.length,
+      unmet: unmetMustHaves.length,
+    },
+    unmetMustHaves: unmetMustHaves.map((r) => ({
+      requirement: r.requirement,
+      evidence: r.evidence,
+      gapNote: r.gapNote,
+    })),
+    scoreCeiling: ceiling,
     matchedKeywords: arr(x?.matchedKeywords, 10),
     missingKeywords: arr(x?.missingKeywords, 10),
     strengths: arr(x?.strengths, 3),
     fixes: arr(x?.fixes, 6),
     rewrittenSummary: String(x?.rewrittenSummary || "No tailored summary was generated."),
     rewrittenBullets: arr(x?.rewrittenBullets, 5),
-    caution: String(x?.caution || "Review every rewritten statement against the original resume before submitting it."),
+    gapsToAddress: mergedGaps,
+    caution: String(
+      x?.caution ||
+        "Review every rewritten statement against the original resume before submitting it. Unmet must-have requirements are listed separately and must not be rewritten around.",
+    ),
   };
 }
 
