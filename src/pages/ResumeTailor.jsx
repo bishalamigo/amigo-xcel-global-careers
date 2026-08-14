@@ -360,13 +360,44 @@ function Gauge({score}) {
 
 function ScoreBreakdown({breakdown}) {
   if(!breakdown)return null;
-  const rows=[["Technical skills",breakdown.skills,35],["Relevant experience",breakdown.experience,25],["Qualifications",breakdown.qualifications,20],["Responsibilities",breakdown.responsibilities,10],["Keywords",breakdown.keywords,10]];
-  return <div style={card}>{rows.map(([label,value,max])=>{const p=Math.max(0,Math.min(100,(Number(value)/max)*100));return <div key={label} style={{marginBottom:14}}><div style={{display:"flex",justifyContent:"space-between",fontSize:13,marginBottom:6}}><span>{label}</span><strong>{value}/{max}</strong></div><div style={{height:7,background:"#1B2A4A10",borderRadius:999}}><div style={{height:"100%",width:`${p}%`,background:C.teal,borderRadius:999}}/></div></div>})}</div>
+  const b=breakdown;
+  const rows=[
+    ["Must-have requirements",b.mustHaves,b.mustHavesMax??55],
+    ["Preferred requirements",b.preferred,b.preferredMax??0],
+    ["Experience depth",b.experience,b.experienceMax??15],
+    ["Responsibilities overlap",b.responsibilities,b.responsibilitiesMax??8],
+    ["Keyword alignment",b.keywords,b.keywordsMax??7],
+  ].filter(([,,max])=>Number(max)>0);
+  return <div style={card}>{rows.map(([label,value,max])=>{const p=Math.max(0,Math.min(100,(Number(value)/max)*100));return <div key={label} style={{marginBottom:14}}><div style={{display:"flex",justifyContent:"space-between",fontSize:13,marginBottom:6}}><span>{label}</span><strong>{Number(value)||0}/{max}</strong></div><div style={{height:7,background:"#1B2A4A10",borderRadius:999}}><div style={{height:"100%",width:`${p}%`,background:C.teal,borderRadius:999}}/></div></div>})}</div>
 }
 
-function Requirements({items=[]}) {
-  return <div>{items.map((x,i)=>{const confirmed=x.status==="confirmed",partial=x.status==="partial";return <div key={i} style={{display:"flex",gap:12,padding:"12px 0",borderBottom:i===items.length-1?"none":`1px solid ${C.border}`}}><div>{confirmed?<CheckCircle2 size={17} color={C.teal}/>:<AlertTriangle size={17} color={partial?C.coral:C.danger}/>}</div><div style={{flex:1}}><div style={{fontWeight:700,fontSize:13}}>{x.requirement}</div><div style={{marginTop:3,color:C.muted,fontSize:12,lineHeight:1.5}}>{x.evidence}</div></div><span style={{fontSize:10,textTransform:"uppercase",fontWeight:700,color:confirmed?C.teal:partial?C.coral:C.danger}}>{x.status}</span></div>})}</div>
+function MustHaveGaps({summary,items=[]}) {
+  if(!summary&&!items.length) return null;
+  return <Section title="Must-have requirements">
+    {summary&&<div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:12}}>
+      <Pill text={`${summary.met}/${summary.total} fully met`} color={C.teal}/>
+      {summary.partial>0&&<Pill text={`${summary.partial} partial or transferable`} color={C.coral}/>}
+      {summary.unmet>0&&<Pill text={`${summary.unmet} not met`} color={C.danger}/>}
+    </div>}
+    {items.length
+      ? <div style={{...card,borderColor:"#B84A4A40"}}>
+          <div style={{fontWeight:700,fontSize:13,marginBottom:10}}>Not met by your resume</div>
+          {items.map((x,i)=><div key={i} style={{marginBottom:12}}>
+            <div style={{display:"flex",gap:8}}><AlertTriangle size={15} color={C.danger} style={{marginTop:2,flexShrink:0}}/><div><div style={{fontWeight:700,fontSize:13}}>{x.requirement}</div><div style={{color:C.muted,fontSize:12,lineHeight:1.5,marginTop:2}}>{x.evidence}</div>{x.gapNote&&<div style={{fontSize:12,marginTop:3}}><strong>To close this:</strong> {x.gapNote}</div>}</div></div>
+          </div>)}
+        </div>
+      : <div style={{fontSize:13,color:C.muted}}>Every must-have requirement has at least partial evidence in your resume.</div>}
+  </Section>
 }
+
+function Pill({text,color}) { return <span style={{background:`${color}15`,color,padding:"6px 10px",borderRadius:999,fontSize:12,fontWeight:700}}>{text}</span> }
+
+const MATCH_LABEL={direct:"Direct match",semantic:"Related evidence",transferable:"Transferable",absent:"Not evidenced"};
+
+function Requirements({items=[]}) {
+  return <div>{items.map((x,i)=>{const confirmed=x.status==="confirmed",partial=x.status==="partial";const color=confirmed?C.teal:partial?C.coral:C.danger;return <div key={i} style={{display:"flex",gap:12,padding:"12px 0",borderBottom:i===items.length-1?"none":`1px solid ${C.border}`}}><div>{confirmed?<CheckCircle2 size={17} color={C.teal}/>:<AlertTriangle size={17} color={color}/>}</div><div style={{flex:1}}><div style={{display:"flex",gap:7,alignItems:"center",flexWrap:"wrap"}}><span style={{fontWeight:700,fontSize:13}}>{x.requirement}</span><span style={{fontSize:9.5,textTransform:"uppercase",fontWeight:800,letterSpacing:".05em",padding:"3px 7px",borderRadius:999,background:x.priority==="must"?"#1B2A4A12":"#1B2A4A08",color:C.muted}}>{x.priority==="must"?"Must have":"Preferred"}</span></div><div style={{marginTop:3,color:C.muted,fontSize:12,lineHeight:1.5}}>{x.evidence}</div>{x.gapNote&&<div style={{marginTop:3,fontSize:12,lineHeight:1.5}}><strong>Gap:</strong> {x.gapNote}</div>}</div><span style={{fontSize:10,textTransform:"uppercase",fontWeight:700,color,textAlign:"right",maxWidth:90}}>{MATCH_LABEL[x.matchType]||x.status}</span></div>})}</div>
+}
+
 
 function Section({title,children}) { return <section style={{marginBottom:28}}><div style={{fontSize:12,letterSpacing:".06em",textTransform:"uppercase",color:C.muted,fontWeight:700,marginBottom:11}}>{title}</div>{children}</section> }
 function Row({icon,text}) { return <div style={{display:"flex",gap:10,alignItems:"flex-start",marginBottom:10,fontSize:14,lineHeight:1.55}}><div style={{marginTop:2,flexShrink:0,width:18,display:"flex",justifyContent:"center"}}>{icon}</div><div>{text}</div></div> }
