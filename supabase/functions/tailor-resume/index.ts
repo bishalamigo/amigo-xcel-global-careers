@@ -51,6 +51,12 @@ HARD RULES (never break):
 - Use strong action verbs and, where the resume already contains numbers, keep them.
 - Mirror keywords from the job description ONLY where the resume supports them.
 
+HONESTY CHECK (run on every line you write):
+- Ask: "could the candidate defend this sentence under interview questioning using only facts in the source resume?"
+- If the answer is no, DO NOT write that line. Record the requirement in "gapsToAddress" instead.
+- Never imply exposure to a tool, ATS, platform, certification or domain the resume does not evidence.
+- Adjacent experience may be described accurately as adjacent (for example LinkedIn Recruiter sourcing), but never renamed as the requested tool.
+
 Return ONLY valid JSON in this exact shape:
 {
   "name": "",
@@ -65,6 +71,7 @@ Return ONLY valid JSON in this exact shape:
   "additional": [],
   "keywordsUsed": [],
   "notAdded": [],
+  "gapsToAddress": [],
   "changeNotes": []
 }
 
@@ -76,8 +83,10 @@ Rules:
 - experience: every real role from the resume, most recent first, 3-5 tailored bullets each.
 - projects: only if the resume has them, else [].
 - notAdded: job requirements deliberately NOT claimed because the resume lacks evidence.
+- gapsToAddress: edits that were rejected by the honesty check, each phrased as the gap the candidate should close or address honestly in the application.
 - changeNotes: max 6 short notes explaining what was reframed and why.
 - No markdown, no commentary, JSON only.
+
 
 RESUME:
 <<<RESUME_START>>>
