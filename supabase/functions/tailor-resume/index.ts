@@ -179,6 +179,8 @@ function normalize(x: any) {
     additional: arr(x?.additional, 10, 200),
     keywordsUsed: arr(x?.keywordsUsed, 20, 60),
     notAdded: arr(x?.notAdded, 10, 200),
+    gapsToAddress: arr(x?.gapsToAddress, 10, 240),
+
     changeNotes: arr(x?.changeNotes, 6, 240),
   };
 }
