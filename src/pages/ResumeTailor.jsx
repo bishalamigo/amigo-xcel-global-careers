@@ -340,6 +340,12 @@ function TailoredResume({tailored,building,buildError,onBuild}) {
       <AlertTriangle size={18} color={C.coral}/>
       <div><strong>Not claimed on your resume:</strong> {r.notAdded.join("; ")}. We never add skills you have not evidenced. Close these gaps and rebuild.</div>
     </div>}
+
+    {!!r.gapsToAddress?.length&&<div style={{display:"flex",gap:10,background:"#B84A4A10",border:"1px solid #B84A4A30",borderRadius:12,padding:15,fontSize:13,lineHeight:1.5,marginTop:12}}>
+      <AlertTriangle size={18} color={C.danger}/>
+      <div><strong>Gaps to address separately:</strong> {r.gapsToAddress.join("; ")}. These edits were rejected because you could not defend them in an interview.</div>
+    </div>}
+
   </div>
 }
 
