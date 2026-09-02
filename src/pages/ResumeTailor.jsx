@@ -34,17 +34,33 @@ export default function ResumeTailor() {
 
   async function loadPdfReader() {
     if (window.pdfjsLib || document.querySelector('script[data-pdfjs="amigoxcel"]')) return;
-    const script = document.createElement("script");
-    script.dataset.pdfjs = "amigoxcel";
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-    script.onload = () => {
-      if (window.pdfjsLib) {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-      }
+    const sources = [
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",
+      "https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js",
+    ];
+    const workers = [
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js",
+      "https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js",
+    ];
+    const add = (i) => {
+      if (i >= sources.length) return;
+      const script = document.createElement("script");
+      script.dataset.pdfjs = "amigoxcel";
+      script.src = sources[i];
+      script.onload = () => {
+        if (window.pdfjsLib) {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = workers[i];
+        } else {
+          script.remove();
+          add(i + 1);
+        }
+      };
+      script.onerror = () => { script.remove(); add(i + 1); };
+      document.body.appendChild(script);
     };
-    document.body.appendChild(script);
+    add(0);
   }
+
 
   const clean = (text) => String(text || "")
     .replace(/\u0000/g, "").replace(/\r/g, "\n")
