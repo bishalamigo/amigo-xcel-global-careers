@@ -138,21 +138,58 @@ export function downloadDoc(r) {
 }
 
 export function downloadPdf(r) {
+  const html = toHtml(r);
+
+  // Print via a hidden iframe. The load event can fire before we attach a
+  // handler, so we trigger printing explicitly instead of relying on onload.
   const frame = document.createElement("iframe");
-  frame.style.position = "fixed";
-  frame.style.right = "0";
-  frame.style.bottom = "0";
-  frame.style.width = "0";
-  frame.style.height = "0";
-  frame.style.border = "0";
+  frame.setAttribute("aria-hidden", "true");
+  frame.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;";
   document.body.appendChild(frame);
-  const doc = frame.contentDocument;
-  doc.open();
-  doc.write(toHtml(r));
-  doc.close();
-  frame.onload = () => {
-    frame.contentWindow.focus();
-    frame.contentWindow.print();
-    setTimeout(() => frame.remove(), 60000);
+
+  const cleanup = () => { try { frame.remove(); } catch { /* ignore */ } };
+
+  const doPrint = () => {
+    try {
+      const win = frame.contentWindow;
+      if (!win) throw new Error("no frame window");
+      win.focus();
+      win.print();
+      setTimeout(cleanup, 60000);
+      return true;
+    } catch {
+      cleanup();
+      return false;
+    }
   };
+
+  try {
+    const doc = frame.contentDocument;
+    if (!doc) throw new Error("no frame document");
+    doc.open();
+    doc.write(html);
+    doc.close();
+    // Give the frame a tick to lay out, then print.
+    setTimeout(() => {
+      if (!doPrint()) openPrintWindow(html);
+    }, 350);
+  } catch {
+    cleanup();
+    openPrintWindow(html);
+  }
 }
+
+// Fallback when the hidden iframe is blocked: open a real tab the user prints.
+function openPrintWindow(html) {
+  const win = window.open("", "_blank");
+  if (!win) {
+    // Popups blocked as well: hand the user a file they can open and print.
+    saveBlob(new Blob([html], { type: "text/html;charset=utf-8" }), "Tailored_Resume.html");
+    return;
+  }
+  win.document.open();
+  win.document.write(html);
+  win.document.close();
+  setTimeout(() => { try { win.focus(); win.print(); } catch { /* user can print manually */ } }, 400);
+}
+
