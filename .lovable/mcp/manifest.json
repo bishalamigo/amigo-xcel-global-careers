@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "sdk_version": "2.0.4",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "www-amigoxcel-com",
+      "version": "0.1.0",
+      "title": "www-amigoxcel-com"
+    },
+    "tools": [
+      {
+        "name": "list_services",
+        "title": "List AmigoXcel services",
+        "description": "List the four AmigoXcel service pillars (Talent, Technology, Training, Media), who they are built for, and the markets served.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_course_details",
+        "title": "Get training program details",
+        "description": "Get details of the AmigoXcel 'Become Job Ready in 30 Days' training program: overview, weekly curriculum, outcomes and how to enroll.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact_info",
+        "title": "Get contact information",
+        "description": "Get AmigoXcel's public contact details, website links and social profiles, plus how quickly enquiries are answered.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_enquiry",
+        "title": "Send an enquiry to AmigoXcel",
+        "description": "Send a strategy-call enquiry to AmigoXcel. Requires the sender's name, email, phone and which service they need. Only submit with details the person actually provided.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Full name of the person enquiring."
+            },
+            "email": {
+              "type": "string",
+              "description": "Email address to reply to."
+            },
+            "phone": {
+              "type": "string",
+              "description": "Phone number, including country code."
+            },
+            "service": {
+              "type": "string",
+              "description": "Service needed, e.g. Talent, Technology, Training or Media."
+            },
+            "message": {
+              "type": "string",
+              "description": "Optional details about the request."
+            }
+          },
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "service"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
