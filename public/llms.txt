@@ -5,6 +5,7 @@
 ## Pages
 
 - [Home](/): Services across talent and recruitment, web and app development, training programs, and video and creative media, plus a free strategy call booking form.
+- [Resume Tailor](/resume-tailor): Free tool that scores a resume against a job description and builds a tailored resume to download.
 
 ## Contact
 
