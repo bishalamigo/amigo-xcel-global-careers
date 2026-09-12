@@ -1,3 +1,4 @@
+import Seo from "../components/Seo";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Hook from "../components/Hook";
@@ -12,6 +13,11 @@ import Footer from "../components/Footer";
 const Index = () => {
   return (
     <div id="top" className="min-h-screen">
+      <Seo
+        title="AmigoXcel — Talent, Tech, Training &amp; Media"
+        description="Talent, technology, training and creative media in one team, so your business can build faster and scale smarter."
+        path="/"
+      />
       <Header />
       <main>
         <Hero />

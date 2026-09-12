@@ -6,6 +6,7 @@ import {
 import mammoth from "mammoth";
 import { supabase } from "@/integrations/supabase/client";
 import { toPlainText, downloadTxt, downloadDoc, downloadPdf } from "@/lib/tailoredResume";
+import Seo from "@/components/Seo";
 
 
 const STAGES = ["Sourced", "Screened", "Shortlisted"];
@@ -167,6 +168,11 @@ export default function ResumeTailor() {
 
   return (
     <div style={{fontFamily:"Inter,sans-serif",background:C.cream,minHeight:"100vh",color:C.navy}}>
+      <Seo
+        title="Free Resume Tailor — Match Your Resume to Any Job"
+        description="Paste your resume and a job description to get an honest match score, the gaps you need to close, and a tailored resume to download free."
+        path="/resume-tailor"
+      />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
         *{box-sizing:border-box} body{margin:0}.fraunces{font-family:Fraunces,serif}
