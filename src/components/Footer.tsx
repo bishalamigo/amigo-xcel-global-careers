@@ -1,4 +1,5 @@
 import { Mail, Globe, Linkedin, Instagram } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -9,12 +10,9 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-xl font-bold text-white mb-3">
-              Amigo<span className="text-primary">Xcel</span>
-            </h3>
+            <div className="mb-4 flex items-center gap-3"><img src={logo} alt="AmigoXcel" className="h-12 w-auto" /><span className="border-l border-border pl-3 font-display font-semibold text-foreground">Academy</span></div>
             <p className="text-sm leading-relaxed max-w-md text-slate-400">
-              The engine behind your growth, bringing together talent, technology,
-              training, and creative media so businesses can scale smarter.
+              Learn how hiring works. Choose the path that fits your career stage.
             </p>
             <div className="flex items-center gap-2 mt-6 text-sm">
               <Mail className="w-4 h-4" />
@@ -35,17 +33,17 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#services" className="hover:text-white transition-colors">
-                  Services
+                  Courses
                 </a>
               </li>
               <li>
-                <a href="#why" className="hover:text-white transition-colors">
-                  Why It Works
+                <a href="#proof" className="hover:text-white transition-colors">
+                  Stories
                 </a>
               </li>
               <li>
-                <a href="#audience" className="hover:text-white transition-colors">
-                  Who We Help
+                <a href="#faq" className="hover:text-white transition-colors">
+                  FAQ
                 </a>
               </li>
               <li>
@@ -102,7 +100,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {year} AmigoXcel. All rights reserved.</p>
+          <p>© {year} AmigoXcel Academy. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-white transition-colors">
               Privacy

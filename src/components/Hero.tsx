@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, GraduationCap, School, UserRound } from "lucide-react";
 
 const scrollTo = (id: string) => {
   const el = document.getElementById(id);
@@ -8,51 +8,56 @@ const scrollTo = (id: string) => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center bg-background overflow-hidden">
-      {/* Single static, subtle gradient */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_20%_0%,hsl(var(--primary)/0.10),transparent_60%)]" />
-
-      <div className="container mx-auto px-6 relative z-10 py-24">
+    <section className="relative overflow-hidden bg-background pt-28 pb-16 md:pt-40 md:pb-24">
+      <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-accent/40 to-transparent pointer-events-none" />
+      <div className="container mx-auto px-5 relative z-10">
         <div className="max-w-4xl">
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mb-6 animate-fade-in">
-            Growth Partner, Not a Service Provider
+          <p className="text-xs font-semibold uppercase text-primary mb-5 animate-fade-in">
+            A learning path for every career stage
           </p>
 
           <h1
-            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-8 animate-fade-in"
+            className="text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.05] mb-6 animate-fade-in"
             style={{ animationDelay: '120ms', animationFillMode: 'backwards' }}
           >
-            Not Just Services.
-            <span className="block hero-accent mt-2">The Engine Behind</span>
-            <span className="block">Your Growth.</span>
+            Know How Hiring Works.
+            <span className="block hero-accent mt-2">Then Dominate It.</span>
           </h1>
 
           <p
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed animate-fade-in"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 leading-relaxed animate-fade-in"
             style={{ animationDelay: '260ms', animationFillMode: 'backwards' }}
           >
-            We bring together talent, technology, training, and creative media so you can build faster, scale smarter, and stand out globally.
+            Start at any age. Master the hiring system. Get results faster.
           </p>
 
           <div
-            className="flex flex-col sm:flex-row gap-4 items-start animate-fade-in"
+            className="animate-fade-in"
             style={{ animationDelay: '380ms', animationFillMode: 'backwards' }}
           >
-            <Button size="xl" className="group" onClick={() => scrollTo('engine')}>
-              Start Your Growth
+            <Button size="xl" className="group w-full sm:w-auto" onClick={() => scrollTo('courses')}>
+              See Your Best Fit
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="xl" onClick={() => scrollTo('contact')}>
-              Book a Free Strategy Call
-            </Button>
           </div>
+        </div>
 
-          <p
-            className="mt-10 text-sm text-muted-foreground max-w-xl animate-fade-in"
-            style={{ animationDelay: '500ms', animationFillMode: 'backwards' }}
-          >
-            Four services under one team: recruitment, software development, training, and video production.
-          </p>
+        <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4 max-w-5xl">
+          {[
+            { label: "Kids", icon: School },
+            { label: "Student", icon: GraduationCap },
+            { label: "Job Seeker", icon: UserRound },
+            { label: "Professional", icon: BriefcaseBusiness },
+          ].map((stage, index) => (
+            <div key={stage.label} className="relative flex min-h-28 flex-col justify-between bg-card p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <stage.icon className="h-5 w-5 text-primary" />
+                <span className="text-xs text-muted-foreground">0{index + 1}</span>
+              </div>
+              <span className="font-display text-base font-semibold">{stage.label}</span>
+              {index < 3 && <ArrowRight className="absolute -right-3 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 rounded-full bg-primary p-1 text-primary-foreground sm:block" />}
+            </div>
+          ))}
         </div>
       </div>
     </section>

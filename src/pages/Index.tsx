@@ -1,11 +1,8 @@
 import Seo from "../components/Seo";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import Hook from "../components/Hook";
-import Services from "../components/Services";
-import CourseDetails from "../components/CourseDetails";
-import WhyItWorks from "../components/WhyItWorks";
-import WhoWeHelp from "../components/WhoWeHelp";
+import AcademyCourses from "../components/AcademyCourses";
+import AcademyFaq from "../components/AcademyFaq";
 import Testimonials from "../components/Testimonials";
 import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
@@ -14,19 +11,16 @@ const Index = () => {
   return (
     <div id="top" className="min-h-screen">
       <Seo
-        title="AmigoXcel — Talent, Tech, Training &amp; Media"
-        description="Talent, technology, training and creative media in one team, so your business can build faster and scale smarter."
+        title="AmigoXcel Academy — Career Learning Paths"
+        description="Choose a clear learning path for your career stage. Explore courses for young learners, graduates, job seekers and recruiters."
         path="/"
       />
       <Header />
       <main>
         <Hero />
-        <Hook />
-        <section id="services"><Services /></section>
-        <section id="courses"><CourseDetails /></section>
-        <section id="why"><WhyItWorks /></section>
-        <section id="audience"><WhoWeHelp /></section>
+        <AcademyCourses />
         <section id="proof"><Testimonials /></section>
+        <AcademyFaq />
         <CallToAction />
       </main>
       <Footer />

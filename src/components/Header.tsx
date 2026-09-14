@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
   { label: "Courses", href: "#courses" },
-  { label: "Why It Works", href: "#why" },
-  { label: "Who We Help", href: "#audience" },
-  { label: "Proof", href: "#proof" },
+  { label: "Stories", href: "#proof" },
+  { label: "FAQ", href: "#faq" },
   { label: "Resume Tailor", href: "/resume-tailor", isRoute: true },
-  { label: "Contact", href: "#contact" },
 ];
 
 const Header = () => {
@@ -56,14 +54,15 @@ const Header = () => {
       <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
         <Link
           to="/"
-          className="font-bold text-lg tracking-tight"
-          aria-label="AmigoXcel home"
+          className="flex items-center gap-2"
+          aria-label="AmigoXcel Academy home"
           onClick={() => setOpen(false)}
         >
-          Amigo<span className="text-primary">Xcel</span>
+          <img src={logo} alt="AmigoXcel" className="h-9 w-auto" />
+          <span className="hidden border-l border-border pl-3 font-display text-sm font-semibold sm:inline">Academy</span>
         </Link>
 
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden lg:flex items-center gap-8">
           {navLinks.map((l) =>
             l.isRoute ? (
               <li key={l.href}>
@@ -88,18 +87,18 @@ const Header = () => {
           )}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Button asChild size="sm">
             <a href="#contact" onClick={(e) => handleAnchor(e, "#contact")}>
-              Book a Call
+              Find Your Best Fit
             </a>
           </Button>
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <Link
             to="/resume-tailor"
-            className="text-xs font-semibold px-3 py-1.5 rounded-full border border-primary/40 text-primary"
+            className="hidden text-xs font-semibold px-3 py-1.5 rounded-md border border-primary/40 text-primary sm:block"
             onClick={() => setOpen(false)}
           >
             Resume Tailor
@@ -116,7 +115,7 @@ const Header = () => {
       </nav>
 
       {open && (
-        <div className="md:hidden bg-background border-t border-border">
+        <div className="lg:hidden bg-background border-t border-border">
           <ul className="container mx-auto px-6 py-4 flex flex-col gap-4">
             {navLinks.map((l) =>
               l.isRoute ? (
@@ -144,7 +143,7 @@ const Header = () => {
             <li>
               <Button asChild className="w-full">
                 <a href="#contact" onClick={(e) => handleAnchor(e, "#contact")}>
-                  Book a Call
+                  Find Your Best Fit
                 </a>
               </Button>
             </li>
