@@ -20,6 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				display: ['"Sora"', 'system-ui', 'sans-serif'],
+				editorial: ['"Fraunces"', 'Georgia', 'serif'],
 				sans: ['"Manrope"', 'system-ui', 'sans-serif']
 			},
 			colors: {

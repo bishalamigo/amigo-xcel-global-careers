@@ -22,18 +22,20 @@ const proof = [
 
 const Testimonials = () => {
   return (
-    <section className="py-28 bg-muted/30">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-16">
+    <section className="bg-card/40 py-16 md:py-24">
+      <div className="container mx-auto px-5">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
           <Reveal>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-              Built on Trust.
-              <span className="block text-primary">Growing Every Day.</span>
+            <span className="inline-flex items-center rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
+              Why people stay
+            </span>
+            <h2 className="mt-6 font-editorial text-3xl font-semibold leading-tight md:text-5xl">
+              Built on trust. Growing every day.
             </h2>
           </Reveal>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mb-16">
+        <div className="mx-auto mb-12 grid max-w-5xl gap-5 md:grid-cols-3">
           {proof.map((p, i) => (
             <Reveal key={i} delay={i * 90}>
               <Card className="bg-card border-border/60 h-full">
@@ -52,7 +54,7 @@ const Testimonials = () => {
           (full name, role, company) before relying on this as social proof.
         */}
         <Reveal>
-          <div className="max-w-3xl">
+          <div className="mx-auto max-w-3xl">
             <Card className="bg-card border-dashed border-border">
               <CardContent className="p-8 md:p-12">
                 <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-5">
