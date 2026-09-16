@@ -13,7 +13,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="flex min-h-screen items-center justify-center bg-background text-foreground">
       <Seo
         title="Page not found — AmigoXcel"
         description="This page doesn't exist. Head back to the AmigoXcel home page to explore talent, technology, training and media services."
@@ -22,8 +22,8 @@ const NotFound = () => {
       />
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
+        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
+        <a href="/" className="text-primary underline hover:text-primary-hover">
           Return to Home
         </a>
       </div>
