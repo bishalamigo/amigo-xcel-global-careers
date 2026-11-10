@@ -45,7 +45,7 @@ const CallToAction = () => {
     setIsSubmitting(true);
     setErrorMessage("");
     try {
-      const { error } = await supabase.from("contact_submissions").insert({ ...parsed.data, message: parsed.data.message || null });
+      const { error } = await supabase.from("contact_submissions").insert({ name: parsed.data.name, email: parsed.data.email, phone: parsed.data.phone, service: parsed.data.service, message: parsed.data.message || null });
       if (error) throw error;
       setSent(true);
       setForm(initialForm);
