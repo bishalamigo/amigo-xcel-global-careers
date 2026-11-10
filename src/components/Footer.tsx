@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="mb-4 flex items-center gap-3"><img src={logo} alt="AmigoXcel" className="h-12 w-auto" /><span className="border-l border-border pl-3 font-display font-semibold text-foreground">Academy</span></div>
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              Learn how hiring works. Choose the path that fits your career stage.
+              Mentor-led courses in tech recruitment and digital marketing.
             </p>
             <div className="flex items-center gap-2 mt-6 text-sm">
               <Mail className="w-4 h-4" />
@@ -32,17 +32,17 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#services" className="transition-colors hover:text-primary">
+                <a href="/#courses" className="transition-colors hover:text-primary">
                   Courses
                 </a>
               </li>
               <li>
-                <a href="#proof" className="transition-colors hover:text-primary">
-                  Stories
+                <a href="/#mentors" className="transition-colors hover:text-primary">
+                  Mentors
                 </a>
               </li>
               <li>
-                <a href="#faq" className="transition-colors hover:text-primary">
+                <a href="/#faq" className="transition-colors hover:text-primary">
                   FAQ
                 </a>
               </li>
@@ -52,7 +52,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#contact" className="transition-colors hover:text-primary">
+                <a href="/#contact" className="transition-colors hover:text-primary">
                   Contact
                 </a>
               </li>
@@ -94,21 +94,13 @@ const Footer = () => {
               </a>
             </div>
             <p className="mt-6 text-xs text-muted-foreground">
-              Serving clients globally from Nepal.
+              careers@amigoxcel.com
             </p>
           </div>
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground md:flex-row">
           <p>© {year} AmigoXcel Academy. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="transition-colors hover:text-primary">
-              Privacy
-            </a>
-            <a href="#" className="transition-colors hover:text-primary">
-              Terms
-            </a>
-          </div>
         </div>
       </div>
     </footer>
