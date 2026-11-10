@@ -160,7 +160,10 @@ All colors MUST be HSL.
   /* Smooth scrolling - Apple/Tesla inspired */
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
+
+  section[id] { scroll-margin-top: 80px; }
 
   /* Focus styles for accessibility - Microsoft Fluent inspired */
   *:focus-visible {
@@ -174,7 +177,7 @@ All colors MUST be HSL.
     @apply font-display;
     line-height: 1.2;
     font-weight: 600;
-    letter-spacing: -0.025em;
+    letter-spacing: 0;
   }
 
   /* Improved button interactions */
@@ -226,4 +229,10 @@ All colors MUST be HSL.
     100% { transform: translateX(-50%); }
   }
   .marquee { animation: marquee 30s linear infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
 }

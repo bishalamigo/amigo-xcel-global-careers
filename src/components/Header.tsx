@@ -3,12 +3,14 @@ import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { openCourseEnquiry } from "@/lib/academy";
 
 const navLinks = [
   { label: "Courses", href: "#courses" },
-  { label: "Stories", href: "#proof" },
+  { label: "Mentors", href: "#mentors" },
+  { label: "Placement Support", href: "#placement" },
   { label: "FAQ", href: "#faq" },
-  { label: "Resume Tailor", href: "/resume-tailor", isRoute: true },
+  { label: "Resume Tailor", href: "/resume-tailor", isRoute: true, footerOnly: true },
 ];
 
 const Header = () => {
@@ -48,22 +50,22 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent"
+          : "bg-background"
       }`}
     >
-      <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="container mx-auto px-4 h-16 flex items-center justify-between gap-3">
         <Link
           to="/"
           className="flex items-center gap-2"
           aria-label="AmigoXcel Academy home"
           onClick={() => setOpen(false)}
         >
-          <img src={logo} alt="AmigoXcel" className="h-9 w-auto" />
-          <span className="hidden border-l border-border pl-3 font-display text-sm font-semibold sm:inline">Academy</span>
+          <img src={logo} alt="AmigoXcel" className="h-8 w-auto sm:h-9" />
+          <span className="border-l border-border pl-2 font-display text-xs font-semibold sm:text-sm">Academy</span>
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">
-          {navLinks.map((l) =>
+          {navLinks.filter((l) => !l.footerOnly).map((l) =>
             l.isRoute ? (
               <li key={l.href}>
                 <Link
@@ -88,36 +90,26 @@ const Header = () => {
         </ul>
 
         <div className="hidden lg:block">
-          <Button asChild size="sm">
-            <a href="#contact" onClick={(e) => handleAnchor(e, "#contact")}>
-              Find Your Best Fit
-            </a>
-          </Button>
+          <Button size="sm" onClick={() => openCourseEnquiry()}>Find Your Best Fit</Button>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <Link
-            to="/resume-tailor"
-            className="hidden text-xs font-semibold px-3 py-1.5 rounded-md border border-primary/40 text-primary sm:block"
-            onClick={() => setOpen(false)}
-          >
-            Resume Tailor
-          </Link>
-          <button
-            className="p-2"
+          <Button size="sm" className="hidden sm:inline-flex" onClick={() => openCourseEnquiry()}>Find Your Best Fit</Button>
+          <Button
+            variant="ghost" size="icon"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          </Button>
         </div>
       </nav>
 
       {open && (
         <div className="lg:hidden bg-background border-t border-border">
           <ul className="container mx-auto px-6 py-4 flex flex-col gap-4">
-            {navLinks.map((l) =>
+            {navLinks.filter((l) => !l.footerOnly).map((l) =>
               l.isRoute ? (
                 <li key={l.href}>
                   <Link
@@ -141,11 +133,7 @@ const Header = () => {
               )
             )}
             <li>
-              <Button asChild className="w-full">
-                <a href="#contact" onClick={(e) => handleAnchor(e, "#contact")}>
-                  Find Your Best Fit
-                </a>
-              </Button>
+              <Button className="w-full" onClick={() => { setOpen(false); openCourseEnquiry(); }}>Find Your Best Fit</Button>
             </li>
           </ul>
         </div>

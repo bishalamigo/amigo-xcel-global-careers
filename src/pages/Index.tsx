@@ -12,14 +12,14 @@ const Index = () => {
     <div id="top" className="min-h-screen">
       <Seo
         title="AmigoXcel Academy — Career Learning Paths"
-        description="Choose a clear learning path for your career stage. Explore courses for young learners, graduates, job seekers and recruiters."
+        description="Explore mentor-led courses in AI-powered tech recruitment and digital marketing, with placement support after your course."
         path="/"
       />
       <Header />
       <main>
         <Hero />
         <AcademyCourses />
-        <section id="proof"><Testimonials /></section>
+        <Testimonials />
         <AcademyFaq />
         <CallToAction />
       </main>
