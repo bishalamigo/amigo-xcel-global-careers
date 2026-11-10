@@ -4,6 +4,7 @@
 - [x] Verify the homepage on desktop and mobile for readability and unchanged structure.
 - [x] Rewrite the course section around concrete learning, time commitment, delivery, feedback, and job-ready outcomes.
 - [x] Verify course filters, disclosures, enquiry selection, and mobile readability.
-- [ ] Focus the homepage on recruitment and digital marketing, with honest mentor and placement-support information.
-- [ ] Fix enquiry selection, navigation, policy placeholders, and phone presentation.
-- [ ] Verify course enquiries and navigation on desktop and phones.
+- [x] Focus the homepage on recruitment and digital marketing, with honest mentor and placement-support information.
+- [x] Fix enquiry selection, navigation, policy placeholders, and phone presentation.
+- [x] Verify course enquiries and navigation on desktop and phones.
+- [ ] Add confirmed digital marketing syllabus and duration, named mentor profiles, and specific placement-support terms (waiting for owner-provided details).
